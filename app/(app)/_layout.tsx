@@ -1,6 +1,7 @@
 import { Redirect, Tabs } from "expo-router";
 import { Text, useColorScheme } from "react-native";
 import Svg, { Path } from "react-native-svg";
+import colors from "tailwindcss/colors";
 import { useSession } from "../../tools/session";
 
 export default function TabLayout() {
@@ -25,7 +26,8 @@ export default function TabLayout() {
           tabBarStyle: {
             borderTopWidth: 0,
             elevation: 0,
-            backgroundColor: colorScheme === "light" ? "#ffffff" : "#171717",
+            backgroundColor:
+              colorScheme === "light" ? colors.white : colors.neutral[900],
           },
           headerShown: false,
           tabBarShowLabel: false,
@@ -36,11 +38,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -51,11 +53,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -66,11 +68,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -87,7 +89,8 @@ export default function TabLayout() {
           tabBarStyle: {
             borderTopWidth: 0,
             elevation: 0,
-            backgroundColor: colorScheme === "light" ? "#ffffff" : "#171717",
+            backgroundColor:
+              colorScheme === "light" ? colors.white : colors.neutral[900],
           },
           headerShown: false,
           tabBarShowLabel: false,
@@ -98,11 +101,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -113,11 +116,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -134,7 +137,8 @@ export default function TabLayout() {
           tabBarStyle: {
             borderTopWidth: 0,
             elevation: 0,
-            backgroundColor: colorScheme === "light" ? "#ffffff" : "#171717",
+            backgroundColor:
+              colorScheme === "light" ? colors.white : colors.neutral[900],
           },
           headerShown: false,
           tabBarShowLabel: false,
@@ -145,11 +149,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -160,11 +164,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -175,11 +179,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -190,11 +194,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -205,11 +209,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -220,11 +224,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -235,11 +239,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -250,11 +254,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -265,11 +269,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -280,11 +284,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -295,11 +299,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -310,11 +314,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -325,11 +329,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -340,11 +344,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -355,11 +359,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -370,11 +374,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -385,11 +389,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -406,7 +410,8 @@ export default function TabLayout() {
           tabBarStyle: {
             borderTopWidth: 0,
             elevation: 0,
-            backgroundColor: colorScheme === "light" ? "#ffffff" : "#171717",
+            backgroundColor:
+              colorScheme === "light" ? colors.white : colors.neutral[900],
           },
           headerShown: false,
           tabBarShowLabel: false,
@@ -417,11 +422,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -432,11 +437,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -447,11 +452,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -462,11 +467,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -483,7 +488,8 @@ export default function TabLayout() {
           tabBarStyle: {
             borderTopWidth: 0,
             elevation: 0,
-            backgroundColor: colorScheme === "light" ? "#ffffff" : "#171717",
+            backgroundColor:
+              colorScheme === "light" ? colors.white : colors.neutral[900],
           },
           headerShown: false,
           tabBarShowLabel: false,
@@ -500,11 +506,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -515,11 +521,11 @@ export default function TabLayout() {
                 stroke={
                   focused
                     ? colorScheme === "light"
-                      ? "#171717"
-                      : "#f5f5f5"
+                      ? colors.neutral[900]
+                      : colors.neutral[100]
                     : colorScheme === "light"
-                    ? "#D4D4D4"
-                    : "#525252"
+                    ? colors.neutral[300]
+                    : colors.neutral[600]
                 }
                 strokeWidth="1.8"
                 strokeLinecap="round"
@@ -538,7 +544,8 @@ export default function TabLayout() {
           tabBarStyle: {
             borderTopWidth: 0,
             elevation: 0,
-            backgroundColor: colorScheme === "light" ? "#ffffff" : "#171717",
+            backgroundColor:
+              colorScheme === "light" ? colors.white : colors.neutral[900],
           },
         }}
       />
@@ -551,7 +558,8 @@ export default function TabLayout() {
           tabBarStyle: {
             borderTopWidth: 0,
             elevation: 0,
-            backgroundColor: colorScheme === "light" ? "#ffffff" : "#171717",
+            backgroundColor:
+              colorScheme === "light" ? colors.white : colors.neutral[900],
           },
         }}
       />

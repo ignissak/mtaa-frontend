@@ -4,8 +4,8 @@ import { Pressable, Text, View, useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Path, Svg } from "react-native-svg";
 import useSWR, { BareFetcher } from "swr";
-import { useSession } from "../../../tools/session";
-import ProfileHeading from "../../../components/ProfileHeading";
+import { useSession } from "../../../../tools/session";
+import ProfileHeading from "../../../../components/ProfileHeading";
 
 
 export default function ProfilePage() {

@@ -36,6 +36,11 @@ export async function setStorageItemAsync(key: string, value: string | null) {
   }
 }
 
+/**
+ * Custom hook that provides a state value and a setter function for storing and retrieving data from storage.
+ * @param key - The key used to store and retrieve the data from storage.
+ * @returns A tuple containing the state value and the setter function.
+ */
 export function useStorageState(key: string): UseStateHook<string> {
   // Public
   const [state, setState] = useAsyncState<string>();
