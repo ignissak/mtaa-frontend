@@ -123,7 +123,7 @@ export default function Login() {
                 width="24px"
                 height="24px"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="1.8"
                 fill="none"
                 color={colorScheme === "light" ? "#a3a3a3" : "#737373"}
                 onPress={() => setShowPassword(!showPassword)}
@@ -131,30 +131,30 @@ export default function Login() {
                 <Path
                   d="M19.5 16L17.0248 12.6038"
                   stroke={colorScheme === "light" ? "#a3a3a3" : "#737373"}
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 ></Path>
                 <Path
                   d="M12 17.5V14"
                   stroke={colorScheme === "light" ? "#a3a3a3" : "#737373"}
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 ></Path>
                 <Path
                   d="M4.5 16L6.96895 12.6124"
                   stroke={colorScheme === "light" ? "#a3a3a3" : "#737373"}
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 ></Path>
                 <Path
                   d="M3 8C6.6 16 17.4 16 21 8"
                   stroke={colorScheme === "light" ? "#a3a3a3" : "#737373"}
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 ></Path>
               </Svg>
             ) : (
@@ -162,7 +162,7 @@ export default function Login() {
                 width="24px"
                 height="24px"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="1.8"
                 fill="none"
                 color={colorScheme === "light" ? "#a3a3a3" : "#737373"}
                 onPress={() => setShowPassword(!showPassword)}
@@ -170,16 +170,16 @@ export default function Login() {
                 <Path
                   d="M3 13C6.6 5 17.4 5 21 13"
                   stroke={colorScheme === "light" ? "#a3a3a3" : "#737373"}
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 ></Path>
                 <Path
                   d="M12 17C10.3431 17 9 15.6569 9 14C9 12.3431 10.3431 11 12 11C13.6569 11 15 12.3431 15 14C15 15.6569 13.6569 17 12 17Z"
                   stroke={colorScheme === "light" ? "#a3a3a3" : "#737373"}
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 ></Path>
               </Svg>
             )}
