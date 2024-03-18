@@ -1,7 +1,7 @@
-import { ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { PlaceCard } from '../../components/PlaceCard';
-import { H1 } from '../../components/headings';
+import { ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { H1 } from "../../components/Heading";
+import { PlaceCard } from "../../components/PlaceCard";
 
 export default function ExplorePage() {
   return (

@@ -7,8 +7,8 @@ import Svg, { Path } from "react-native-svg";
 import colors from "tailwindcss/colors";
 import ToggleSwitch from "toggle-switch-react-native";
 import CustomSheetBackdrop from "../../../../components/CustomSheetBackdrop";
+import { H1 } from "../../../../components/Heading";
 import Radio from "../../../../components/Radio";
-import { H1 } from "../../../../components/headings";
 import { IAppearance, appState$ } from "../../../../tools/state";
 
 const page = observer(function SettingsPage() {
