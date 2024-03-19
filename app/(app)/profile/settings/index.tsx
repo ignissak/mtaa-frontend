@@ -6,14 +6,17 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
 import colors from "tailwindcss/colors";
 import ToggleSwitch from "toggle-switch-react-native";
+import { updateSettings } from "../../../../api/users";
 import CustomSheetBackdrop from "../../../../components/CustomSheetBackdrop";
 import { H1 } from "../../../../components/Heading";
 import Radio from "../../../../components/Radio";
+import { useSession } from "../../../../tools/session";
 import { IAppearance, appState$ } from "../../../../tools/state";
 
 const page = observer(function SettingsPage() {
   const [name, setName] = React.useState("");
   const colorScheme = useColorScheme();
+  const { session } = useSession();
 
   const { savedSettings, localSettings } = appState$;
 
@@ -31,15 +34,25 @@ const page = observer(function SettingsPage() {
   const handleAppearanceSheetModalPress = useCallback(() => {
     appearanceSheetModalRef.current?.present();
   }, []);
+  const handleAppearanceSheetModalClose = useCallback(() => {
+    appearanceSheetModalRef.current?.dismiss();
+  }, []);
   const handleSheetChanges = useCallback((index: number) => {}, []);
 
   const handleAppearanceChange = (value: IAppearance) => {
-    console.log("Changing appearance (local settings) to: ", value);
+    console.log("Changing appearance (local settings) to:", value);
     localSettings.appearance.set(value);
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
     console.log("Saving settings: ", localSettings.get());
+    const res = await updateSettings(session as string);
+    const status = res.status;
+
+    if (status !== 200) {
+      console.log("Failed to update settings: ", res);
+      return;
+    }
     savedSettings.language.set(localSettings.language.get());
     savedSettings.appearance.set(localSettings.appearance.get());
     savedSettings.visitedPublic.set(localSettings.visitedPublic.get());
@@ -126,7 +139,7 @@ const page = observer(function SettingsPage() {
               snapPoints={snapPoints}
               onChange={handleSheetChanges}
               backdropComponent={(backdropProps) => (
-                <CustomSheetBackdrop {...backdropProps} />
+                <CustomSheetBackdrop {...backdropProps} close={handleAppearanceSheetModalClose} />
               )}
               backgroundStyle={{
                 backgroundColor:

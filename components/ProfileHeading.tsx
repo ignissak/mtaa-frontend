@@ -4,8 +4,8 @@ import { Pressable, Text, View, useColorScheme } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import useSWR from "swr";
 import { swrGET } from "../api";
-import { getSettingsStates } from "../api/users";
 import { useSession } from "../tools/session";
+import { appState$ } from "../tools/state";
 
 export default function ProfileHeading({
   targetUserId,
@@ -14,8 +14,6 @@ export default function ProfileHeading({
 }) {
   const colorScheme = useColorScheme();
   const { session, signOut } = useSession();
-  const { setUserLanguage, setAppearance, setVisitedPublic } =
-    getSettingsStates();
 
   const { data, error, isLoading } = useSWR<
     {
@@ -25,7 +23,7 @@ export default function ProfileHeading({
         points?: number;
         settings?: {
           appearance: "SYSTEM" | "LIGHT_MODE" | "DARK_MODE";
-          language: string;
+          language: "EN_GB" | "SK_SK";
           visitedPublic: boolean;
         };
         status: number;
@@ -45,9 +43,15 @@ export default function ProfileHeading({
 
   useEffect(() => {
     if (data) {
-      setUserLanguage(data.data.settings?.language || "en-GB");
-      setAppearance(data.data.settings?.appearance || "SYSTEM");
-      setVisitedPublic(data.data.settings?.visitedPublic.toString() || "false");
+      appState$.savedSettings.language.set(
+        data.data.settings?.language || "EN_GB"
+      );
+      appState$.savedSettings.appearance.set(
+        data.data.settings?.appearance || "SYSTEM"
+      );
+      appState$.savedSettings.visitedPublic.set(
+        data.data.settings?.visitedPublic || false
+      );
     }
   }, [data]);
 
