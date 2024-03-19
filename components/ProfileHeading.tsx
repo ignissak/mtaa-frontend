@@ -4,7 +4,7 @@ import { Pressable, Text, View, useColorScheme } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import useSWR from "swr";
 import { swrGET } from "../api";
-import { useSession } from "../tools/session";
+import { signOut } from "../api/auth";
 import { appState$ } from "../tools/state";
 
 export default function ProfileHeading({
@@ -13,7 +13,6 @@ export default function ProfileHeading({
   targetUserId: string;
 }) {
   const colorScheme = useColorScheme();
-  const { session, signOut } = useSession();
 
   const { data, error, isLoading } = useSWR<
     {
@@ -32,7 +31,10 @@ export default function ProfileHeading({
     },
     any
   >(
-    [`${process.env.EXPO_PUBLIC_API_URL}/v1/users/${targetUserId}`, session],
+    [
+      `${process.env.EXPO_PUBLIC_API_URL}/v1/users/${targetUserId}`,
+      appState$.user.token.get(),
+    ],
     ([url, token]) => swrGET(url, token)
   );
 
@@ -52,6 +54,7 @@ export default function ProfileHeading({
       appState$.savedSettings.visitedPublic.set(
         data.data.settings?.visitedPublic || false
       );
+      appState$.savedSettings.name.set(data.data.settings?.name)
     }
   }, [data]);
 
@@ -73,10 +76,20 @@ export default function ProfileHeading({
   return (
     <View id="profile.details">
       {error ? (
-        <View className="flex items-center flex-row gap-4 w-full px-6 mb-4">
+        <View className="flex items-center flex-col gap-4 w-full px-6 mb-4">
           <Text className=" text-red-500 font-semibold text-base">
             {error.message}
           </Text>
+          <Pressable
+            onPress={() => {
+              signOut();
+              router.replace("/login");
+            }}
+          >
+            <Text className="text-red-500 font-semibold text-base">
+              Log out
+            </Text>
+          </Pressable>
         </View>
       ) : (
         <View className="flex justify-between items-center flex-row w-full px-6 mb-4">

@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import { Pressable, Text, TextInput, View, useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Path, Svg } from "react-native-svg";
-import { useSession } from "../tools/session";
+import { login } from "../api/auth";
+import { appState$ } from "../tools/state";
 
 export default function Login() {
-  const { signIn, session } = useSession();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [showPassword, setShowPassword] = React.useState(false);
@@ -16,7 +16,7 @@ export default function Login() {
   const colorScheme = useColorScheme();
 
   useEffect(() => {
-    if (session) {
+    if (appState$.user.token.get()) {
       router.replace("/explore");
     }
   }, []);
@@ -52,16 +52,16 @@ export default function Login() {
       return;
     }
     setIsLoading(true);
-    const json = await signIn(email, password);
+    const json = await login(email, password);
 
     if (json.data.status === 401) {
       setPasswordError("Invalid login credentials");
     } else if (json.data.status === 200) {
-      console.info("Logged in");
+      console.log("Logged in");
       setPasswordError("");
       router.replace("/explore");
     } else {
-      console.error("Failed to log in", json);
+      console.log("Failed to log in", json);
       setPasswordError("Failed to log in");
     }
     setIsLoading(false);

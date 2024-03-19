@@ -2,18 +2,15 @@ import { Redirect, Tabs } from "expo-router";
 import { Text, useColorScheme } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import colors from "tailwindcss/colors";
-import { useSession } from "../../tools/session";
+import { appState$ } from "../../tools/state";
+import { observe } from "@legendapp/state";
+import { observer } from "@legendapp/state/react";
 
-export default function TabLayout() {
-  const { session, isLoading, userId } = useSession();
+const page = observer(function TabLayout() {
 
   const colorScheme = useColorScheme();
 
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
-
-  if (!session) {
+  if (!appState$.user.token.get()) {
     return <Redirect href="/login" />;
   }
 
@@ -565,4 +562,6 @@ export default function TabLayout() {
       />
     </Tabs>
   );
-}
+})
+
+export default page;

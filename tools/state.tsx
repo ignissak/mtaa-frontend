@@ -16,6 +16,12 @@ export type ISettings = {
   language: ILanguage;
   appearance: IAppearance;
   visitedPublic: boolean;
+  name?: string;
+};
+
+export type IUser = {
+  token?: string;
+  userId?: number;
 };
 
 export const appState$ = observable({
@@ -23,12 +29,18 @@ export const appState$ = observable({
     language: "EN_GB",
     appearance: "SYSTEM",
     visitedPublic: true,
+    name: undefined,
   } as ISettings,
   localSettings: {
     language: "EN_GB",
     appearance: "SYSTEM",
     visitedPublic: true,
+    name: undefined,
   } as ISettings,
+  user: {
+    token: undefined,
+    userId: undefined,
+  } as IUser,
 });
 
 // Global configuration
