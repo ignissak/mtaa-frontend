@@ -6,8 +6,9 @@ import useSWR from "swr";
 import { swrGET } from "../api";
 import { signOut } from "../api/auth";
 import { appState$ } from "../tools/state";
+import { observer } from "@legendapp/state/react";
 
-export default function ProfileHeading({
+const page = observer(function ProfileHeading({
   targetUserId,
 }: {
   targetUserId: string;
@@ -45,6 +46,7 @@ export default function ProfileHeading({
 
   useEffect(() => {
     if (data) {
+      console.log("Loaded profile data:", data.data);
       appState$.savedSettings.language.set(
         data.data.settings?.language || "EN_GB"
       );
@@ -54,7 +56,8 @@ export default function ProfileHeading({
       appState$.savedSettings.visitedPublic.set(
         data.data.settings?.visitedPublic || false
       );
-      appState$.savedSettings.name.set(data.data.settings?.name)
+      appState$.savedSettings.name.set(data.data.name);
+      appState$.user.points.set(data.data.points);
     }
   }, [data]);
 
@@ -95,10 +98,10 @@ export default function ProfileHeading({
         <View className="flex justify-between items-center flex-row w-full px-6 mb-4">
           <View>
             <Text className="text-xl text-neutral-900 dark:text-neutral-100 font-semibold">
-              {data?.data.name}
+              {appState$.savedSettings.name.get()}
             </Text>
             <Text className="text-base text-neutral-600 dark:text-neutral-400">
-              {data?.data.points} points
+              {appState$.user.points.get()} points
             </Text>
           </View>
           <View className="flex gap-8 flex-row">
@@ -161,4 +164,5 @@ export default function ProfileHeading({
       )}
     </View>
   );
-}
+});
+export default page;

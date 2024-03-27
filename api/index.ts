@@ -1,6 +1,8 @@
 import axios from "axios";
 import { BareFetcher } from "swr";
 
+axios.defaults.validateStatus = (status) => status >= 200 && status <= 500;
+
 export const swrGET: BareFetcher<any> = async (url: string, token: string) => {
   const response = await axios.get(url, {
     headers: {

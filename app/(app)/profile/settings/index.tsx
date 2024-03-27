@@ -1,5 +1,6 @@
 import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
 import { observer } from "@legendapp/state/react";
+import { router } from "expo-router";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { Pressable, Text, TextInput, View, useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,7 +15,6 @@ import Radio from "../../../../components/Radio";
 import { IAppearance, ILanguage, appState$ } from "../../../../tools/state";
 
 const page = observer(function SettingsPage() {
-  const [name, setName] = React.useState("");
   const colorScheme = useColorScheme();
   const toast = useToast();
 
@@ -26,6 +26,7 @@ const page = observer(function SettingsPage() {
     localSettings.language.set(savedSettings.language.get());
     localSettings.appearance.set(savedSettings.appearance.get());
     localSettings.visitedPublic.set(savedSettings.visitedPublic.get());
+    localSettings.name.set(savedSettings.name.get());
   }, []);
 
   // references
@@ -65,7 +66,9 @@ const page = observer(function SettingsPage() {
 
     if (status !== 200) {
       console.log("Failed to update settings: ", res);
-      toast.show("Failed to save settings!", { type: "danger" });
+      toast.show("Failed to save settings! Error: " + res.data.error, {
+        type: "danger",
+      });
       return;
     }
     savedSettings.language.set(localSettings.language.get());
@@ -73,6 +76,17 @@ const page = observer(function SettingsPage() {
     savedSettings.visitedPublic.set(localSettings.visitedPublic.get());
     console.log("Saved settings: ", savedSettings.get());
     toast.show("Settings have been saved!", { type: "success" });
+  };
+
+  const handleCancel = async () => {
+    console.log("Canceling settings: ", localSettings.get());
+    localSettings.language.set(savedSettings.language.get());
+    localSettings.appearance.set(savedSettings.appearance.get());
+    localSettings.visitedPublic.set(savedSettings.visitedPublic.get());
+    localSettings.name.set(savedSettings.name.get());
+
+    console.log("Local settings after cancel: ", localSettings.get());
+    router.navigate("/profile/user/" + appState$.user.userId.get());
   };
 
   return (
@@ -89,12 +103,13 @@ const page = observer(function SettingsPage() {
               className={`p-3 bg-neutral-100 dark:bg-neutral-800 rounded-md flex-row items-center justify-between`}
             >
               <TextInput
-                value={name}
-                onChangeText={setName}
+                value={localSettings.name.get()}
+                onChangeText={(value) => localSettings.name.set(value)}
                 placeholder="John Doe"
                 placeholderTextColor={"#a3a3a3"}
-                autoCapitalize="none"
+                autoCapitalize="words"
                 className={`text-neutral-900 dark:text-neutral-100 rounded-md text-base flex-1`}
+                maxLength={20}
               />
             </View>
           </View>
@@ -326,8 +341,8 @@ const page = observer(function SettingsPage() {
           </View>
         </View>
         {/* BOTTOM BUTTONS */}
-        <View className="flex flex-row space-x-6 mb-8 justify-between">
-          <Pressable className="grow">
+        <View className="flex flex-row space-x-6 mb-20 justify-between">
+          <Pressable className="grow" onPress={handleCancel}>
             <Text className="p-3 text-center bg-neutral-200 dark:bg-neutral-800 rounded-md text-neutral-900 dark:text-neutral-100 font-semibold text-base">
               Cancel
             </Text>

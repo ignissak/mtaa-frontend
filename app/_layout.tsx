@@ -1,11 +1,16 @@
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { observer, useMount } from "@legendapp/state/react";
 import { Slot } from "expo-router";
 import { Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ToastProvider } from "react-native-toast-notifications";
 import { SWRConfig } from "swr";
 
-export default function HomeLayout() {
+const page = observer(function HomeLayout() {
+  useMount(() => {
+    console.log("Home layout mounted");
+  });
+
   return (
     <SWRConfig>
       <GestureHandlerRootView style={{ flex: 1 }}>
@@ -41,4 +46,6 @@ export default function HomeLayout() {
       </GestureHandlerRootView>
     </SWRConfig>
   );
-}
+});
+
+export default page;

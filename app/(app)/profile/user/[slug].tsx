@@ -1,14 +1,11 @@
-import { observe } from "@legendapp/state";
+import { observer } from "@legendapp/state/react";
 import { useLocalSearchParams } from "expo-router";
-import { useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProfileHeading from "../../../../components/ProfileHeading";
 import { appState$ } from "../../../../tools/state";
-import { observer } from "@legendapp/state/react";
 
 const page = observer(function ProfilePage() {
   const { slug } = useLocalSearchParams();
-  const colorScheme = useColorScheme();
 
   const targetUserId = slug === "me" ? appState$.user.userId.get() : slug;
 

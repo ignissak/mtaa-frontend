@@ -111,14 +111,14 @@ export default function Login() {
             <TextInput
               value={password}
               onChangeText={setPassword}
-              secureTextEntry={showPassword}
+              secureTextEntry={!showPassword}
               placeholder="Type your password"
               placeholderTextColor={"#a3a3a3"}
               autoCapitalize="none"
               onEndEditing={validatePassword}
               className={`text-neutral-900 dark:text-neutral-100 rounded-md text-base flex-1`}
             />
-            {showPassword ? (
+            {!showPassword ? (
               <Svg
                 width="24px"
                 height="24px"

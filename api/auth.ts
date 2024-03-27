@@ -1,6 +1,5 @@
 import axios from "axios";
 import { appState$ } from "../tools/state";
-axios.defaults.validateStatus = (status) => status >= 200 && status <= 500;
 
 export const login = async (email: string, password: string) => {
   const res = await axios.post(
@@ -69,7 +68,7 @@ export const testAuth = async (token: string | null) => {
   if (status === 200) {
     console.log("Session is valid");
     appState$.user.token.set(token);
-    appState$.user.userId.set(res.data.data.userId);
+    appState$.user.userId.set(res.data.data.id);
     return res;
   }
   console.log("Session is invalid");
