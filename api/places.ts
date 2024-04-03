@@ -44,3 +44,25 @@ export const getTrendingPlaces = async (token: string) => {
   );
   return res;
 };
+
+export const searchPlaces = async (
+  token: string,
+  limit: number = 10,
+  page: number = 1,
+  latitude: number,
+  longitude: number,
+  query: string = "",
+  region: string = "",
+  type: string = ""
+) => {
+  const res = await axios.get(
+    `${process.env.EXPO_PUBLIC_API_URL}/v1/places?limit=${limit}&page=${page}&latitude=${latitude}&longitude=${longitude}&query=${query}&region=${region}&type=${type}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return res;
+};

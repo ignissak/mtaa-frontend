@@ -1,0 +1,31 @@
+export enum PlaceType {
+  PARKS_AND_GARDENS = "Parks and Gardens",
+  CHURCHES = "Churches",
+  CASTLES = "Castles",
+  MUSEUMS = "Museums",
+  GALLERIES = "Galleries",
+  MONUMENTS = "Monuments",
+  MEMORIALS = "Memorials",
+  STATUES = "Statues",
+  WELLS_AND_SPRINGS = "Wells and Springs",
+  LAKES = "Lakes",
+  RIVERS = "Rivers",
+  MOUNTAINS = "Mountains",
+  CAVES = "Caves",
+  WATERFALLS = "Waterfalls",
+  MILLS = "Mills",
+  BRIDGES = "Bridges",
+  TOWERS = "Towers",
+  OTHER = "Other",
+}
+
+export enum Region {
+  BRATISLAVA = "Bratislava",
+  TRNAVA = "Trnava",
+  TRENCIN = "Trenčín",
+  NITRA = "Nitra",
+  ZILINA = "Žilina",
+  BANSKA_BYSTRICA = "Banská Bystrica",
+  PRESOV = "Prešov",
+  KOSICE = "Košice",
+}

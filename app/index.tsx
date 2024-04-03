@@ -9,6 +9,9 @@ import { appState$ } from "../tools/state";
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
+import { enableReactNativeComponents } from "@legendapp/state/config/enableReactNativeComponents";
+enableReactNativeComponents();
+
 const page = observer(function Page() {
   const token = appState$.user.token.get();
   const [isReady, setIsReady] = useState(false);

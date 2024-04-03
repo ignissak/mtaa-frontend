@@ -1,8 +1,5 @@
 import { observer } from "@legendapp/state/react";
-import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { H1 } from "../../components/Heading";
-import { PlaceCard } from "../../components/PlaceCard";
 import NearPlaces from "../../components/NearPlaces";
 import TrendingPlaces from "../../components/TrendingPlaces";
 

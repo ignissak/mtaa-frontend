@@ -19,7 +19,7 @@ import { H1 } from "./Heading";
 const page = observer(function Page({ place }: { place: IPlace }) {
   const colorScheme = useColorScheme();
   const averageRating = useObservable<number>(0);
-  const visits = useObservable<number>(0);
+  const visits = useObservable<number>(-1);
 
   const openGps = (lat: number, lng: number, label: string) => {
     const scheme = Platform.OS === "ios" ? "maps:" : "geo:";
@@ -108,7 +108,7 @@ const page = observer(function Page({ place }: { place: IPlace }) {
             ></Path>
           </Svg>
           <Text className="text-neutral-900 dark:text-neutral-100 font-semibold">
-            {visits.get()}
+            {visits.get() === -1 ? "Loading..." : visits.get()}
           </Text>
         </View>
         <View className="px-4 py-3 rounded-md flex flex-row space-x-2 items-center bg-neutral-100 dark:bg-neutral-800">

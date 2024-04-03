@@ -309,7 +309,7 @@ const page = observer(function SettingsPage() {
                 <View className="flex flex-col justify-between h-full">
                   <View className="px-6 py-2">
                     <Text className="font-semibold text-lg text-neutral-900 dark:text-neutral-100 mb-4">
-                      Appearance settings
+                      Language settings
                     </Text>
                     <Pressable
                       className="flex flex-row justify-between mb-3"

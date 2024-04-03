@@ -35,7 +35,8 @@
     "socket.io-client": "^4.7.5",
     "swr": "^2.2.5",
     "toggle-switch-react-native": "^3.3.0",
-    "react-native-maps": "1.10.0"
+    "react-native-maps": "1.10.0",
+    "expo-haptics": "~12.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
