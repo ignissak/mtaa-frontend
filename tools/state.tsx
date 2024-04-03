@@ -91,6 +91,13 @@ export const findLoadedPlace = (id: number) => {
   return undefined;
 };
 
+export const addLoadedPlacee = (data: IPlace) => {
+  if (findLoadedPlace(data.id)) {
+    return;
+  }
+  appData$.loadedPlaces.push({ ...data, fetchedAt: new Date() });
+};
+
 export const initSocket = () => {
   // Initialize socket.io
   const socket = io(process.env.EXPO_PUBLIC_API_URL as string, {

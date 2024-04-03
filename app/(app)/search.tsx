@@ -25,7 +25,12 @@ import CustomSheetBackdrop from "../../components/CustomSheetBackdrop";
 import { H1 } from "../../components/Heading";
 import { PlaceSearchCard } from "../../components/PlaceSearchCard";
 import { PlaceType, Region } from "../../tools/constants";
-import { ILocation, IPlace, appState$ } from "../../tools/state";
+import {
+  ILocation,
+  IPlace,
+  addLoadedPlacee,
+  appState$,
+} from "../../tools/state";
 
 const page = observer(function SearchPage() {
   const query = useObservable("");
@@ -73,12 +78,12 @@ const page = observer(function SearchPage() {
     const formattedCategories = categories
       .get()
       .join(";")
-      .replace(" ", "_")
+      .replaceAll(" ", "_")
       .toUpperCase();
     const formattedRegions = regions
       .get()
       .join(";")
-      .replace(" ", "_")
+      .replaceAll(" ", "_")
       .toUpperCase();
 
     handleFiltersSheetModalClose();
@@ -126,6 +131,10 @@ const page = observer(function SearchPage() {
     data.set(res.data.data);
     loading.set(false);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+
+    for (const place of res.data.data) {
+      addLoadedPlacee(place);
+    }
   }, []);
 
   return (

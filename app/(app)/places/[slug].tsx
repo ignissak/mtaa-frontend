@@ -6,7 +6,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { getPlaceById } from "../../../api/places";
 import { H1 } from "../../../components/Heading";
 import PlacePage from "../../../components/PlacePage";
-import { IPlace, appState$, findLoadedPlace } from "../../../tools/state";
+import {
+  IPlace,
+  addLoadedPlacee,
+  appState$,
+  findLoadedPlace,
+} from "../../../tools/state";
 
 export default function PlacePageParent() {
   const { slug } = useLocalSearchParams();
@@ -44,6 +49,9 @@ export default function PlacePageParent() {
       place$.set(data.data);
       isLoading$.set(false);
       console.log("Loaded place:", data.data.id);
+
+      // Add the loaded place to the app state
+      addLoadedPlacee(data.data);
     } catch (error) {
       console.log("Error fetching place:", error);
       isErrored$.set("Error fetching place.");
