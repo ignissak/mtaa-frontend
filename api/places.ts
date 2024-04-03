@@ -24,8 +24,8 @@ export const getNearPlaces = async (
     `${process.env.EXPO_PUBLIC_API_URL}/v1/places?limit=${limit}&page=${page}&latitude=${latitude}&longitude=${longitude}`,
     {
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+        "Response-Type": "application/json",
       },
     }
   );
@@ -33,12 +33,12 @@ export const getNearPlaces = async (
 };
 
 export const getTrendingPlaces = async (token: string) => {
-  const res = await axios.get(
+  const res = axios.get(
     `${process.env.EXPO_PUBLIC_API_URL}/v1/places/trending`,
     {
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+        "Response-Type": "application/json",
       },
     }
   );

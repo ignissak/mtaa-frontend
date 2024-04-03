@@ -1,8 +1,16 @@
 import { router } from "expo-router";
 import React, { useEffect } from "react";
-import { Pressable, Text, TextInput, View, useColorScheme } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  Text,
+  TextInput,
+  View,
+  useColorScheme,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Path, Svg } from "react-native-svg";
+import colors from "tailwindcss/colors";
 import { login } from "../api/auth";
 import { appState$ } from "../tools/state";
 
@@ -68,13 +76,13 @@ export default function Login() {
   };
 
   return (
-    <SafeAreaView className="flex justify-center items-start h-full bg-neutral-50 dark:bg-neutral-900 min-h-screen px-6">
-      <Text className="text-2xl font-bold mb-4 text-neutral-900 dark:text-neutral-100">
+    <SafeAreaView className="flex items-start justify-center h-full min-h-screen px-6 bg-neutral-50 dark:bg-neutral-900">
+      <Text className="mb-4 text-2xl font-bold text-neutral-900 dark:text-neutral-100">
         Log In
       </Text>
-      <View className="w-full flex gap-3">
+      <View className="flex w-full gap-3">
         {/* EMAIL */}
-        <View className="flex gap-1 w-full">
+        <View className="flex w-full gap-1">
           <Text className="text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
             EMAIL ADDRESS
           </Text>
@@ -99,7 +107,7 @@ export default function Login() {
           )}
         </View>
         {/* PASSWORD */}
-        <View className="flex gap-1 w-full">
+        <View className="flex w-full gap-1">
           <Text className="text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
             PASSWORD
           </Text>
@@ -188,7 +196,7 @@ export default function Login() {
             <Text className="text-red-500">{passwordError}</Text>
           )}
         </View>
-        <View className="w-full flex items-end">
+        <View className="flex items-end w-full">
           <Pressable>
             <Text className="text-base font-semibold text-violet-700">
               Forgot your password?
@@ -196,15 +204,19 @@ export default function Login() {
           </Pressable>
         </View>
         <Pressable
-          className="p-3 bg-violet-200 rounded-md w-full"
+          className="flex items-center justify-center w-full p-3 rounded-md bg-violet-200"
           onPress={handleSignIn}
         >
-          <Text className="text-base font-semibold text-violet-700 text-center">
-            {isLoading ? "Loading..." : "Log In"}
+          <Text className="text-base font-semibold text-center text-violet-700">
+            {isLoading ? (
+              <ActivityIndicator color={colors.violet[700]} />
+            ) : (
+              "Log In"
+            )}
           </Text>
         </Pressable>
-        <Pressable className="p-3 bg-neutral-100 dark:bg-neutral-800 rounded-md w-full">
-          <Text className="text-base font-semibold text-neutral-900 dark:text-neutral-100 text-center">
+        <Pressable className="w-full p-3 rounded-md bg-neutral-100 dark:bg-neutral-800">
+          <Text className="text-base font-semibold text-center text-neutral-900 dark:text-neutral-100">
             Create New Account
           </Text>
         </Pressable>

@@ -16,7 +16,7 @@ import { useToast } from "react-native-toast-notifications";
 import colors from "tailwindcss/colors";
 import { visitPlace } from "../../api/places";
 import { H1 } from "../../components/Heading";
-import { ILocation, appState$ } from "../../tools/state";
+import { ILocation, appState$, markPlaceVisited } from "../../tools/state";
 import * as Haptics from "expo-haptics";
 
 const page = observer(function ScannerPage() {
@@ -62,6 +62,7 @@ const page = observer(function ScannerPage() {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
         router.navigate("/places/" + data.data.placeId);
         toast.show("Successfully marked place as visited", { type: "success" });
+        markPlaceVisited(data.data.placeId);
       }
     } catch (e) {
       toast.show("Error processing QR code", { type: "danger" });
@@ -90,7 +91,7 @@ const page = observer(function ScannerPage() {
 
   if (permission?.status === "undetermined") {
     return (
-      <SafeAreaView className="bg-neutral-50 dark:bg-neutral-950 min-h-screen h-full mt-4">
+      <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
         <H1>Allow camera access</H1>
         <Text className="text-neutral-600 dark:text-neutral-400">
           Camera access is required for proper application functionality. Please
@@ -102,17 +103,17 @@ const page = observer(function ScannerPage() {
 
   if (isErrored.get()) {
     return (
-      <SafeAreaView className="bg-neutral-50 dark:bg-neutral-950 min-h-screen h-full mt-4">
+      <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
         <H1>There was an error!</H1>
         <View className="px-6">
           <Text className="text-neutral-600 dark:text-neutral-400">
             {isErrored.get()}
           </Text>
           <Pressable
-            className="mt-6 p-3 w-full rounded-md bg-neutral-100 dark:bg-neutral-800"
+            className="w-full p-3 mt-6 rounded-md bg-neutral-100 dark:bg-neutral-800"
             onPress={Linking.openSettings}
           >
-            <Text className="text-center text-neutral-900 dark:text-neutral-100 font-semibold text-base">
+            <Text className="text-base font-semibold text-center text-neutral-900 dark:text-neutral-100">
               Open App Settings
             </Text>
           </Pressable>
@@ -123,13 +124,13 @@ const page = observer(function ScannerPage() {
 
   if (processing.get()) {
     return (
-      <SafeAreaView className="bg-neutral-50 dark:bg-neutral-950 min-h-screen h-full mt-4 flex flex-col">
+      <SafeAreaView className="flex flex-col h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
         <H1>Processing QR code data...</H1>
-        <Text className="text-neutral-600 dark:text-neutral-400 px-6">
+        <Text className="px-6 text-neutral-600 dark:text-neutral-400">
           Please wait while we process the QR code data.
         </Text>
 
-        <View className="grow flex items-center justify-center">
+        <View className="flex items-center justify-center grow">
           <ActivityIndicator
             size="large"
             color={
@@ -142,12 +143,12 @@ const page = observer(function ScannerPage() {
   }
 
   return (
-    <SafeAreaView className="bg-neutral-50 dark:bg-neutral-950 min-h-screen h-full mt-4">
+    <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
       <H1>Scan a QR code</H1>
-      <Text className="text-neutral-600 dark:text-neutral-400 px-6 mb-2">
+      <Text className="px-6 mb-2 text-neutral-600 dark:text-neutral-400">
         If you are at the location of a place, find a QR code to scan.
       </Text>
-      <View className="px-6 h-full">
+      <View className="h-full px-6">
         <CameraView
           facing={"back"}
           style={{ flex: 1 }}

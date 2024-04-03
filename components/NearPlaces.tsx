@@ -34,7 +34,7 @@ const page = observer(function Page() {
       appState$.location.set(location as ILocation);
 
       // Fetch API data after getting the location
-      fetchNearPlaces(location);
+      await fetchNearPlaces(location);
     };
 
     getLocation();

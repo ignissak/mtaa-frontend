@@ -54,6 +54,7 @@ export default function PlacePageParent() {
       // Add the loaded place to the app state
       addLoadedPlace(data.data);
 
+      console.log("Checking if user has visited place", data.data.id);
       const hasVisited = await hasVisitedPlace(
         appState$.user.token.get(),
         appState$.user.userId.get(),
@@ -78,7 +79,7 @@ export default function PlacePageParent() {
         else={() => (
           <View>
             <H1>Loading...</H1>
-            <ScrollView className="px-6" horizontal={true}>
+            <ScrollView className="px-6 mb-6" horizontal={true}>
               {Array.from({ length: 5 }, (_, i) => (
                 <View
                   key={i}
@@ -86,6 +87,16 @@ export default function PlacePageParent() {
                 ></View>
               ))}
             </ScrollView>
+            <View className="px-6">
+              <View className="w-16 h-5 mb-2 rounded-md bg-neutral-100 dark:bg-neutral-800"></View>
+              <View className="w-full h-20 mb-2 rounded-md bg-neutral-100 dark:bg-neutral-800"></View>
+              <View className="flex flex-row mb-6 space-x-3">
+                <View className="h-8 rounded-md w-14 bg-neutral-100 dark:bg-neutral-800"></View>
+                <View className="h-8 rounded-md w-14 bg-neutral-100 dark:bg-neutral-800"></View>
+              </View>
+              <View className="w-16 h-5 mb-2 rounded-md bg-neutral-100 dark:bg-neutral-800"></View>
+              <View className="w-full rounded-md h-44 bg-neutral-100 dark:bg-neutral-800"></View>
+            </View>
           </View>
         )}
       >

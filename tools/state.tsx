@@ -101,15 +101,11 @@ export const addLoadedPlace = (data: IPlace) => {
 
 export const markPlaceVisited = (id: number, visited: boolean = true) => {
   // set the place in the appData
-  appData$.loadedPlaces.set(
-    appData$.loadedPlaces.get().map((p) => {
-      if (p.id === id) {
-        console.log("Marking place visited:", id, visited);
-        p.visited = visited;
-      }
-      return p;
-    })
-  );
+  appData$.loadedPlaces.map((place) => {
+    if (place.id.get() === id) {
+      place.visited.set(visited);
+    }
+  });
 };
 
 export const initSocket = () => {

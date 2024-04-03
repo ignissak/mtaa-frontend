@@ -1,5 +1,6 @@
 import { ObservableObject, opaqueObject } from "@legendapp/state";
 import { Show, observer, useObservable } from "@legendapp/state/react";
+import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
 import { useEffect } from "react";
 import {
@@ -16,7 +17,7 @@ import { RefreshControl } from "react-native-gesture-handler";
 import MapView, { Marker } from "react-native-maps";
 import { Path, Svg } from "react-native-svg";
 import colors from "tailwindcss/colors";
-import { IPlace, getSocket } from "../tools/state";
+import { IPlace, appData$, getSocket } from "../tools/state";
 import { H1 } from "./Heading";
 
 const page = observer(function Page({
@@ -28,6 +29,9 @@ const page = observer(function Page({
   const averageRating = useObservable<number>(0);
   const visits = useObservable<number>(-1);
   const refreshing = useObservable<boolean>(false);
+  const visited = appData$.loadedPlaces.find(
+    (p) => p.id.get() == place.id.get()
+  )?.visited;
 
   const openGps = (lat: number, lng: number, label: string) => {
     const scheme = Platform.OS === "ios" ? "maps:" : "geo:";
@@ -72,6 +76,7 @@ const page = observer(function Page({
 
   const handleBottomButton = () => {
     if (!place.visited.get()) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
       router.push("/scanner");
     }
   };
@@ -229,18 +234,16 @@ const page = observer(function Page({
           </MapView>
         </View>
       </ScrollView>
-      <Show if={() => typeof place.visited.get() === "boolean"}>
+      <Show if={visited !== undefined}>
         <Pressable className="px-6" onPress={handleBottomButton}>
           <Text
             className={`w-full py-3 font-semibold text-center rounded-md bg-neutral-100 dark:bg-neutral-800 ${
-              place.visited.get()
+              visited?.get()
                 ? "text-neutral-400 dark:text-neutral-600"
                 : "text-neutral-900 dark:text-neutral-100"
             }`}
           >
-            {place.visited.get()
-              ? "You have visited this place"
-              : "I am here now"}
+            {visited?.get() ? "You have visited this place" : "I am here now"}
           </Text>
         </Pressable>
       </Show>
