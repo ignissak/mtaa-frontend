@@ -1,13 +1,11 @@
+import { observer } from "@legendapp/state/react";
 import { Redirect, Tabs } from "expo-router";
-import { Text, useColorScheme } from "react-native";
+import { useColorScheme } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import colors from "tailwindcss/colors";
 import { appState$ } from "../../tools/state";
-import { observe } from "@legendapp/state";
-import { observer } from "@legendapp/state/react";
 
 const page = observer(function TabLayout() {
-
   const colorScheme = useColorScheme();
 
   if (!appState$.user.token.get()) {
@@ -15,7 +13,7 @@ const page = observer(function TabLayout() {
   }
 
   return (
-    <Tabs screenOptions={{}}>
+    <Tabs screenOptions={{}} backBehavior="history">
       <Tabs.Screen
         name="explore"
         options={{
@@ -562,6 +560,6 @@ const page = observer(function TabLayout() {
       />
     </Tabs>
   );
-})
+});
 
 export default page;

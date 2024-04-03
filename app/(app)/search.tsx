@@ -28,9 +28,7 @@ import { PlaceType, Region } from "../../tools/constants";
 import {
   ILocation,
   IPlace,
-
   addLoadedPlace,
-
   appState$,
 } from "../../tools/state";
 
@@ -45,6 +43,8 @@ const page = observer(function SearchPage() {
   const loading = useObservable(false);
   const data = useObservable<[] | undefined>(undefined);
   const error = useObservable("");
+  const page = useObservable(1);
+  const numOfPages = useObservable(0);
 
   const filtersSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["50%"], []);
@@ -115,8 +115,8 @@ const page = observer(function SearchPage() {
 
     const res = await searchPlaces(
       appState$.user.token.get(),
-      10,
-      1,
+      5,
+      page.get(),
       appState$.location.coords.latitude.get(),
       appState$.location.coords.longitude.get(),
       formattedQuery,

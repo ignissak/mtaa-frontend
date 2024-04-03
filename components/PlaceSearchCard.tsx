@@ -8,7 +8,7 @@ export function PlaceSearchCard(props: {
   url: string;
 }) {
   const reroute = () => {
-    router.navigate(props.url);
+    router.push(props.url);
     console.log("Rerouting to:", props.url);
   };
 

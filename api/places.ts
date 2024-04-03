@@ -66,3 +66,45 @@ export const searchPlaces = async (
   );
   return res;
 };
+
+export const visitPlace = async (
+  token: string,
+  code: string,
+  latitude: number,
+  longitude: number
+) => {
+  const res = await axios.post(
+    `${process.env.EXPO_PUBLIC_API_URL}/v1/places/visits`,
+    {
+      qrData: code,
+      latitude,
+      longitude,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return res;
+};
+
+export const hasVisitedPlace = async (
+  token: string,
+  userId: number,
+  placeId: number
+) => {
+  const res = await axios.get(
+    `${process.env.EXPO_PUBLIC_API_URL}/v1/places/visits/${userId}?placeId=${placeId}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return res;
+};

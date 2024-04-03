@@ -33,6 +33,12 @@
         {
           "isAndroidBackgroundLocationEnabled": true
         }
+      ],
+      [
+        "expo-camera",
+        {
+          "recordAudioAndroid": false
+        }
       ]
     ]
   }

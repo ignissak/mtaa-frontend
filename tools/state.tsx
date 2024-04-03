@@ -51,6 +51,7 @@ export type IPlace = {
   fetchedAt?: Date;
   longitude?: number;
   latitude?: number;
+  visited?: boolean;
 };
 
 export const appState$ = observable({
@@ -96,6 +97,19 @@ export const addLoadedPlace = (data: IPlace) => {
     return;
   }
   appData$.loadedPlaces.push({ ...data, fetchedAt: new Date() });
+};
+
+export const markPlaceVisited = (id: number, visited: boolean = true) => {
+  // set the place in the appData
+  appData$.loadedPlaces.set(
+    appData$.loadedPlaces.get().map((p) => {
+      if (p.id === id) {
+        console.log("Marking place visited:", id, visited);
+        p.visited = visited;
+      }
+      return p;
+    })
+  );
 };
 
 export const initSocket = () => {

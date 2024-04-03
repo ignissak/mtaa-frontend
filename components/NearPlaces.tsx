@@ -84,7 +84,7 @@ const page = observer(function Page() {
             {Array.from({ length: 5 }, (_, i) => (
               <View
                 key={i}
-                className="bg-neutral-100 dark:bg-neutral-800 h-40 w-64 mr-3 rounded-md"
+                className="w-64 h-40 mr-3 rounded-md bg-neutral-100 dark:bg-neutral-800"
               ></View>
             ))}
           </ScrollView>
@@ -121,10 +121,10 @@ const page = observer(function Page() {
               Make sure to allow location access in settings.
             </Text>
             <Pressable
-              className="mt-6 p-3 w-full rounded-md bg-neutral-100 dark:bg-neutral-800"
+              className="w-full p-3 mt-6 rounded-md bg-neutral-100 dark:bg-neutral-800"
               onPress={Linking.openSettings}
             >
-              <Text className="text-center text-neutral-900 dark:text-neutral-100 font-semibold text-base">
+              <Text className="text-base font-semibold text-center text-neutral-900 dark:text-neutral-100">
                 Open App Settings
               </Text>
             </Pressable>

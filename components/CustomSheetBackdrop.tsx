@@ -33,9 +33,7 @@ const CustomBackdrop = ({
     [style, containerAnimatedStyle]
   );
 
-  return (
-    <Animated.View style={containerStyle} onTouchEnd={close} />
-  );
+  return <Animated.View style={containerStyle} onTouchEnd={close} />;
 };
 
 export default CustomBackdrop;

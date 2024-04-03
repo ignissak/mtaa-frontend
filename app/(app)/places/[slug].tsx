@@ -3,7 +3,7 @@ import { useLocalSearchParams } from "expo-router";
 import { useEffect } from "react";
 import { Linking, Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { getPlaceById } from "../../../api/places";
+import { getPlaceById, hasVisitedPlace } from "../../../api/places";
 import { H1 } from "../../../components/Heading";
 import PlacePage from "../../../components/PlacePage";
 import {
@@ -11,6 +11,7 @@ import {
   addLoadedPlace,
   appState$,
   findLoadedPlace,
+  markPlaceVisited,
 } from "../../../tools/state";
 
 export default function PlacePageParent() {
@@ -52,6 +53,18 @@ export default function PlacePageParent() {
 
       // Add the loaded place to the app state
       addLoadedPlace(data.data);
+
+      const hasVisited = await hasVisitedPlace(
+        appState$.user.token.get(),
+        appState$.user.userId.get(),
+        data.data.id
+      );
+      const status = hasVisited.status;
+
+      if (status === 200) {
+        markPlaceVisited(data.data.id, hasVisited.data.data.length > 0);
+        place$.visited.set(hasVisited.data.data.length > 0);
+      }
     } catch (error) {
       console.log("Error fetching place:", error);
       isErrored$.set("Error fetching place.");
@@ -59,7 +72,7 @@ export default function PlacePageParent() {
   };
 
   return (
-    <SafeAreaView className="bg-neutral-50 dark:bg-neutral-950 min-h-screen h-full mt-4">
+    <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
       <Show
         if={() => !isLoading$.get()}
         else={() => (
@@ -69,14 +82,14 @@ export default function PlacePageParent() {
               {Array.from({ length: 5 }, (_, i) => (
                 <View
                   key={i}
-                  className="bg-neutral-100 dark:bg-neutral-800 h-40 w-64 mr-3 rounded-md"
+                  className="w-64 h-40 mr-3 rounded-md bg-neutral-100 dark:bg-neutral-800"
                 ></View>
               ))}
             </ScrollView>
           </View>
         )}
       >
-        <Show if={isErrored$} else={() => <PlacePage place={place$.get()} />}>
+        <Show if={isErrored$} else={() => <PlacePage place={place$} />}>
           <View>
             <H1>Cannot load near places</H1>
             <View className="px-6">
@@ -87,10 +100,10 @@ export default function PlacePageParent() {
                 Make sure to allow location access in settings.
               </Text>
               <Pressable
-                className="mt-6 p-3 w-full rounded-md bg-neutral-100 dark:bg-neutral-800"
+                className="w-full p-3 mt-6 rounded-md bg-neutral-100 dark:bg-neutral-800"
                 onPress={Linking.openSettings}
               >
-                <Text className="text-center text-neutral-900 dark:text-neutral-100 font-semibold text-base">
+                <Text className="text-base font-semibold text-center text-neutral-900 dark:text-neutral-100">
                   Open App Settings
                 </Text>
               </Pressable>

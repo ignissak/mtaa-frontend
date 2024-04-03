@@ -14,19 +14,19 @@ export function PlaceCard(props: {
 
   return (
     <Pressable onPress={reroute}>
-      <View className="rounded-md overflow-hidden h-40 w-64 mr-3">
+      <View className="w-64 h-40 mr-3 overflow-hidden rounded-md">
         <Image
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 object-cover w-full h-full"
           source={{ uri: `data:image/jpg;base64,${props.image}` }}
         />
 
         <View
-          className="relative flex justify-end h-full w-full p-3"
+          className="relative flex justify-end w-full h-full p-3"
           style={{
             backgroundColor: "rgba(0, 0, 0, 0.5)",
           }}
         >
-          <Text className="text-neutral-100 text-lg font-semibold">
+          <Text className="text-lg font-semibold text-neutral-100">
             {props.title}
           </Text>
           <Text className="text-neutral-400">{props.subtitle}</Text>
