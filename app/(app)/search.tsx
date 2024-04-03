@@ -28,7 +28,9 @@ import { PlaceType, Region } from "../../tools/constants";
 import {
   ILocation,
   IPlace,
-  addLoadedPlacee,
+
+  addLoadedPlace,
+
   appState$,
 } from "../../tools/state";
 
@@ -133,7 +135,7 @@ const page = observer(function SearchPage() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
 
     for (const place of res.data.data) {
-      addLoadedPlacee(place);
+      addLoadedPlace(place);
     }
   }, []);
 

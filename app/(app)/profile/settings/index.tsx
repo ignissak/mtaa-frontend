@@ -90,9 +90,9 @@ const page = observer(function SettingsPage() {
   };
 
   return (
-    <SafeAreaView className="my-4 bg-neutral-50 dark:bg-neutral-950 min-h-screen h-full w-full border border-blue-500">
+    <SafeAreaView className="my-4 bg-neutral-50 dark:bg-neutral-950 min-h-screen h-full w-full">
       <H1>Settings</H1>
-      <View className="flex flex-col justify-between px-6 grow border border-red-800">
+      <View className="flex flex-col justify-between px-6 grow">
         {/* SETTINGS */}
         <View className="flex flex-col gap-4">
           <View className="flex flex-col space-y-1">
@@ -341,7 +341,7 @@ const page = observer(function SettingsPage() {
           </View>
         </View>
         {/* BOTTOM BUTTONS */}
-        <View className="flex flex-row space-x-6 mb-20 justify-between">
+        <View className="flex flex-row space-x-6 mb-12 justify-between">
           <Pressable className="grow" onPress={handleCancel}>
             <Text className="p-3 text-center bg-neutral-200 dark:bg-neutral-800 rounded-md text-neutral-900 dark:text-neutral-100 font-semibold text-base">
               Cancel

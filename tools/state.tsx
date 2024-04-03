@@ -91,7 +91,7 @@ export const findLoadedPlace = (id: number) => {
   return undefined;
 };
 
-export const addLoadedPlacee = (data: IPlace) => {
+export const addLoadedPlace = (data: IPlace) => {
   if (findLoadedPlace(data.id)) {
     return;
   }

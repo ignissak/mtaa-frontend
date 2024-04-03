@@ -8,7 +8,7 @@ import { H1 } from "../../../components/Heading";
 import PlacePage from "../../../components/PlacePage";
 import {
   IPlace,
-  addLoadedPlacee,
+  addLoadedPlace,
   appState$,
   findLoadedPlace,
 } from "../../../tools/state";
@@ -51,7 +51,7 @@ export default function PlacePageParent() {
       console.log("Loaded place:", data.data.id);
 
       // Add the loaded place to the app state
-      addLoadedPlacee(data.data);
+      addLoadedPlace(data.data);
     } catch (error) {
       console.log("Error fetching place:", error);
       isErrored$.set("Error fetching place.");

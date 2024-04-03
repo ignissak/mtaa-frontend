@@ -183,8 +183,8 @@ const page = observer(function Page({ place }: { place: IPlace }) {
         <MapView
           className="w-full h-full"
           region={{
-            latitude: place.latitude as number,
-            longitude: place.longitude as number,
+            latitude: place.latitude as number || 0,
+            longitude: place.longitude as number || 0,
             latitudeDelta: 0.015,
             longitudeDelta: 0.015,
           }}
