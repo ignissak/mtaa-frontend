@@ -16,6 +16,8 @@ export enum PlaceType {
   MILLS = "Mills",
   BRIDGES = "Bridges",
   TOWERS = "Towers",
+  ZOO = "Zoo",
+  PALACES = "Palaces",
   OTHER = "Other",
 }
 
