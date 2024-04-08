@@ -5,6 +5,7 @@ import {
   observer,
   useObservable,
 } from "@legendapp/state/react";
+import { FlashList } from "@shopify/flash-list";
 import * as Haptics from "expo-haptics";
 import * as Location from "expo-location";
 import { useCallback, useMemo, useRef } from "react";
@@ -12,13 +13,13 @@ import {
   ActivityIndicator,
   Keyboard,
   Pressable,
-  ScrollView,
   Text,
   View,
   useColorScheme,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Path, Svg } from "react-native-svg";
+import { useToast } from "react-native-toast-notifications";
 import colors from "tailwindcss/colors";
 import { searchPlaces } from "../../api/places";
 import CustomSheetBackdrop from "../../components/CustomSheetBackdrop";
@@ -41,13 +42,16 @@ const page = observer(function SearchPage() {
   const colorScheme = useColorScheme();
 
   const loading = useObservable(false);
-  const data = useObservable<[] | undefined>(undefined);
+  const data = useObservable<any[] | undefined>(undefined);
   const error = useObservable("");
   const page = useObservable(1);
   const numOfPages = useObservable(0);
+  const totalResults = useObservable(0);
 
   const filtersSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["50%"], []);
+
+  const toast = useToast();
 
   const handleFiltersSheetModalPress = useCallback(() => {
     if (loading.get()) return;
@@ -92,6 +96,9 @@ const page = observer(function SearchPage() {
 
     loading.set(true);
     data.set([]);
+    page.set(1);
+    numOfPages.set(0);
+    totalResults.set(0);
 
     if (!appState$.location.get().coords) {
       // Get location
@@ -115,7 +122,7 @@ const page = observer(function SearchPage() {
 
     const res = await searchPlaces(
       appState$.user.token.get(),
-      5,
+      2,
       page.get(),
       appState$.location.coords.latitude.get(),
       appState$.location.coords.longitude.get(),
@@ -131,31 +138,84 @@ const page = observer(function SearchPage() {
     }
 
     data.set(res.data.data);
+    numOfPages.set(res.data.numOfPages);
     loading.set(false);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
 
     for (const place of res.data.data) {
       addLoadedPlace(place);
     }
+
+    if (res.data.data.length > 0) {
+      totalResults.set(res.data.data[0].total);
+    }
   }, []);
 
+  const handleInfiniteScroll = async () => {
+    console.log("Infinite scrolling...");
+    if (page.get() < numOfPages.get()) {
+      page.set((prev) => prev + 1);
+    } else return;
+
+    const formattedQuery = query.get().trim();
+    const formattedCategories = categories
+      .get()
+      .join(";")
+      .replaceAll(" ", "_")
+      .toUpperCase();
+    const formattedRegions = regions
+      .get()
+      .join(";")
+      .replaceAll(" ", "_")
+      .toUpperCase();
+
+    handleFiltersSheetModalClose();
+
+    const res = await searchPlaces(
+      appState$.user.token.get(),
+      2,
+      page.get(),
+      appState$.location.coords.latitude.get(),
+      appState$.location.coords.longitude.get(),
+      formattedQuery,
+      formattedRegions,
+      formattedCategories
+    );
+
+    if (res.status !== 200) {
+      toast.show("Error fetching search results.", { type: "danger" });
+      return;
+    }
+
+    const newData: any[] = res.data.data;
+    const old = data.get() || ([] as any[]);
+    const merged = old.concat(newData);
+    data.set(merged);
+
+    console.log("Added more places to the list, length:", merged.length);
+
+    for (const place of res.data.data) {
+      addLoadedPlace(place);
+    }
+  };
+
   return (
-    <SafeAreaView className="bg-neutral-50 dark:bg-neutral-950 min-h-screen h-full mt-4">
+    <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
       <H1>Search</H1>
 
-      <Text className="text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400 px-6 mb-4">
-        VIEWING {data.get()?.length || 0} RESULTS
+      <Text className="px-6 mb-4 text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
+        VIEWING {totalResults.get()} RESULTS
       </Text>
 
-      <View className="h-full flex flex-col pb-24 ">
-        <View className="px-6 items-center flex flex-row gap-3 mb-2">
+      <View className="flex flex-col h-full pb-24 ">
+        <View className="flex flex-row items-center gap-3 px-6 mb-2">
           {/* Input */}
           <View
             className={`p-3 bg-neutral-100 dark:bg-neutral-800 rounded-md grow `}
           >
             <Reactive.TextInput
               $value={query}
-              className="text-neutral-900 dark:text-neutral-100 rounded-md text-base"
+              className="text-base rounded-md text-neutral-900 dark:text-neutral-100"
               placeholder="Search for places"
               placeholderTextColor={colors.neutral[400]}
               onSubmitEditing={handleSearch}
@@ -165,7 +225,7 @@ const page = observer(function SearchPage() {
           </View>
           {/* Filter button */}
           <Pressable onPress={handleFiltersSheetModalPress}>
-            <View className="p-4 bg-neutral-100 dark:bg-neutral-800 rounded-md">
+            <View className="p-4 rounded-md bg-neutral-100 dark:bg-neutral-800">
               <Svg
                 width="20px"
                 height="20px"
@@ -206,7 +266,7 @@ const page = observer(function SearchPage() {
         <Show
           if={() => error.get().length === 0}
           else={() => (
-            <View className="grow flex items-center justify-center">
+            <View className="flex items-center justify-center grow">
               <Text className="text-red-500">Oh no! There was an error.</Text>
             </View>
           )}
@@ -214,7 +274,7 @@ const page = observer(function SearchPage() {
           <Show
             if={() => !loading.get() && data.get()}
             else={() => (
-              <View className="grow flex items-center justify-center">
+              <View className="flex items-center justify-center grow">
                 <Show
                   if={() => loading.get()}
                   else={() => (
@@ -239,27 +299,28 @@ const page = observer(function SearchPage() {
             <Show
               if={() => data.get()?.length!! > 0}
               else={() => (
-                <View className="grow flex items-center justify-center">
+                <View className="flex items-center justify-center grow">
                   <Text className="text-neutral-600 dark:text-neutral-400">
                     No results found. Try searching for something else.
                   </Text>
                 </View>
               )}
             >
-              <ScrollView className="flex flex-col px-6">
-                {/* Results will be here */}
-                <Show if={() => data.get() !== undefined}>
-                  {data.get()?.map((place: IPlace) => (
-                    <PlaceSearchCard
-                      key={place.id}
-                      title={place.name}
-                      subtitle={place.type}
-                      url={`/places/${place.id}`}
-                      image={place.images[0].data}
-                    />
-                  ))}
-                </Show>
-              </ScrollView>
+              <FlashList
+                data={data.get() || []} // Add a default empty array if data is undefined
+                estimatedItemSize={10}
+                renderItem={({ item }: { item: IPlace }) => (
+                  <PlaceSearchCard
+                    key={item.id}
+                    url={`/places/${item.id}`}
+                    title={item.name}
+                    subtitle={item.type}
+                    image={item.images[0].data}
+                  />
+                )}
+                onEndReachedThreshold={0.5}
+                onEndReached={handleInfiniteScroll}
+              />
             </Show>
           </Show>
         </Show>
@@ -286,11 +347,11 @@ const page = observer(function SearchPage() {
         <BottomSheetView>
           <View className="flex flex-col justify-between h-full">
             <View className="px-6 py-2">
-              <Text className="font-semibold text-lg text-neutral-900 dark:text-neutral-100 mb-4">
+              <Text className="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
                 Filters
               </Text>
 
-              <Text className="text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400 mb-2">
+              <Text className="mb-2 text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
                 CATEGORIES
               </Text>
 
@@ -313,7 +374,7 @@ const page = observer(function SearchPage() {
                 ))}
               </View>
 
-              <Text className="text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400 mb-2">
+              <Text className="mb-2 text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
                 REGIONS
               </Text>
 
@@ -337,9 +398,9 @@ const page = observer(function SearchPage() {
               </View>
             </View>
             {/* Sheet buttons */}
-            <View className="flex flex-row space-x-6 mb-8 px-6 justify-between">
+            <View className="flex flex-row justify-between px-6 mb-8 space-x-6">
               <Pressable className="grow" onPress={handleSearch}>
-                <Text className="p-3 text-center bg-violet-200 rounded-md text-violet-900 font-semibold text-base">
+                <Text className="p-3 text-base font-semibold text-center rounded-md bg-violet-200 text-violet-900">
                   Search
                 </Text>
               </Pressable>
