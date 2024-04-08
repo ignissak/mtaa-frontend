@@ -48,6 +48,8 @@ const page = observer(function SearchPage() {
   const numOfPages = useObservable(0);
   const totalResults = useObservable(0);
 
+  const PAGE_LIMIT = 5;
+
   const filtersSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ["50%"], []);
 
@@ -122,7 +124,7 @@ const page = observer(function SearchPage() {
 
     const res = await searchPlaces(
       appState$.user.token.get(),
-      2,
+      PAGE_LIMIT,
       page.get(),
       appState$.location.coords.latitude.get(),
       appState$.location.coords.longitude.get(),
@@ -173,7 +175,7 @@ const page = observer(function SearchPage() {
 
     const res = await searchPlaces(
       appState$.user.token.get(),
-      2,
+      PAGE_LIMIT,
       page.get(),
       appState$.location.coords.latitude.get(),
       appState$.location.coords.longitude.get(),

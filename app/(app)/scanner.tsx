@@ -67,6 +67,7 @@ const page = observer(function ScannerPage() {
         router.navigate("/places/" + data.data.placeId);
         toast.show("Successfully marked place as visited", { type: "success" });
         markPlaceVisited(data.data.placeId);
+        appState$.user.points.set((p) => p + data.data.place.points);
       }
     } catch (e) {
       toast.show("Error processing QR code", { type: "danger" });

@@ -1,20 +1,27 @@
-import { Show, useObservable } from "@legendapp/state/react";
+import { Show, observer, useObservable } from "@legendapp/state/react";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect } from "react";
 import { Linking, Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { getPlaceById, hasVisitedPlace } from "../../../api/places";
+import {
+  getPlaceById,
+  getPlaceReviews,
+  hasVisitedPlace,
+} from "../../../api/places";
 import { H1 } from "../../../components/Heading";
 import PlacePage from "../../../components/PlacePage";
 import {
   IPlace,
+  IReview,
   addLoadedPlace,
+  addReviewsForPlace,
   appState$,
   findLoadedPlace,
   markPlaceVisited,
+  setTotalReviewCountForPlace,
 } from "../../../tools/state";
 
-export default function PlacePageParent() {
+const page = observer(function PlacePageParent() {
   const { slug } = useLocalSearchParams();
   const isLoading$ = useObservable(true);
   const isErrored$ = useObservable<boolean | string>(false);
@@ -42,7 +49,7 @@ export default function PlacePageParent() {
       );
       if (res.status != 200) {
         console.log("Error fetching place:", res.data);
-        isErrored$.set("Error fetching place.");
+        isErrored$.set("Error fetching place. " + res.data);
         isLoading$.set(false);
         return;
       }
@@ -66,9 +73,22 @@ export default function PlacePageParent() {
         markPlaceVisited(data.data.id, hasVisited.data.data.length > 0);
         place$.visited.set(hasVisited.data.data.length > 0);
       }
+
+      console.log("Fetching reviews for place:", data.data.id);
+      const reviews = await getPlaceReviews(
+        appState$.user.token.get(),
+        data.data.id
+      );
+
+      if (reviews.status === 200) {
+        place$.reviews.set(reviews.data.data as IReview[]);
+        place$.totalReviewCount.set(reviews.data.countOfReviews);
+        addReviewsForPlace(data.data.id, reviews.data.data as IReview[]);
+        setTotalReviewCountForPlace(data.data.id, reviews.data.countOfReviews);
+      }
     } catch (error) {
       console.log("Error fetching place:", error);
-      isErrored$.set("Error fetching place.");
+      isErrored$.set("Error fetching place. " + error);
     }
   };
 
@@ -124,4 +144,6 @@ export default function PlacePageParent() {
       </Show>
     </SafeAreaView>
   );
-}
+});
+
+export default page;

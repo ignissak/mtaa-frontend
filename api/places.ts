@@ -91,6 +91,20 @@ export const visitPlace = async (
   return res;
 };
 
+export const removeVisitPlace = async (token: string, placeId: number) => {
+  const res = await axios.delete(
+    `${process.env.EXPO_PUBLIC_API_URL}/v1/places/visits/${placeId}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return res;
+};
+
 export const hasVisitedPlace = async (
   token: string,
   userId: number,
@@ -98,6 +112,25 @@ export const hasVisitedPlace = async (
 ) => {
   const res = await axios.get(
     `${process.env.EXPO_PUBLIC_API_URL}/v1/places/visits/${userId}?placeId=${placeId}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return res;
+};
+
+export const getPlaceReviews = async (
+  token: string,
+  placeId: number,
+  page: number = 1,
+  limit: number = 5
+) => {
+  const res = await axios.get(
+    `${process.env.EXPO_PUBLIC_API_URL}/v1/places/reviews/${placeId}?page=${page}&limit=${limit}`,
     {
       headers: {
         "Content-Type": "application/json",

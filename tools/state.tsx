@@ -37,6 +37,19 @@ export type IImage = {
   data: string;
 };
 
+export type IReview = {
+  user: {
+    id: number;
+    name: string | null;
+    email: string;
+  };
+  id: number;
+  rating: number;
+  comment: string;
+  createdAt: Date;
+  images: IImage[];
+};
+
 export type IPlace = {
   id: number;
   name: string;
@@ -52,6 +65,8 @@ export type IPlace = {
   longitude?: number;
   latitude?: number;
   visited?: boolean;
+  reviews?: IReview[];
+  totalReviewCount?: number;
 };
 
 export const appState$ = observable({
@@ -104,6 +119,25 @@ export const markPlaceVisited = (id: number, visited: boolean = true) => {
   appData$.loadedPlaces.map((place) => {
     if (place.id.get() === id) {
       place.visited.set(visited);
+    }
+  });
+};
+
+export const addReviewsForPlace = (id: number, reviews: IReview[]) => {
+  appData$.loadedPlaces.map((place) => {
+    if (place.id.get() === id) {
+      if (!place.reviews.get()) {
+        place.reviews.set([]);
+      }
+      place.reviews.set((prev) => [...prev, ...reviews]);
+    }
+  });
+};
+
+export const setTotalReviewCountForPlace = (id: number, count: number) => {
+  appData$.loadedPlaces.map((place) => {
+    if (place.id.get() === id) {
+      place.totalReviewCount.set(count);
     }
   });
 };
