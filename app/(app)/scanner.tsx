@@ -1,5 +1,6 @@
 import { observer, useObservable } from "@legendapp/state/react";
 import { CameraView, useCameraPermissions } from "expo-camera/next";
+import * as Haptics from "expo-haptics";
 import * as Location from "expo-location";
 import { router } from "expo-router";
 import React, { useEffect } from "react";
@@ -17,7 +18,6 @@ import colors from "tailwindcss/colors";
 import { visitPlace } from "../../api/places";
 import { H1 } from "../../components/Heading";
 import { ILocation, appState$, markPlaceVisited } from "../../tools/state";
-import * as Haptics from "expo-haptics";
 
 const page = observer(function ScannerPage() {
   const [permission, requestPermission] = useCameraPermissions();
@@ -55,6 +55,10 @@ const page = observer(function ScannerPage() {
       const data = res.data;
       if (data.error) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+        if (res.status === 409) {
+          toast.show("You have already visited this place", { type: "danger" });
+          return;
+        }
         toast.show(data.error, { type: "danger" });
         return;
       }
@@ -70,7 +74,9 @@ const page = observer(function ScannerPage() {
     } finally {
       processing.set(false);
       // remove the code
-      codes.splice(codes.indexOf(code), 1);
+      setTimeout(() => {
+        codes.splice(codes.indexOf(code), 1);
+      }, 5000);
     }
   };
 
