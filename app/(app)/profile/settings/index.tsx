@@ -86,11 +86,11 @@ const page = observer(function SettingsPage() {
     localSettings.name.set(savedSettings.name.get());
 
     console.log("Local settings after cancel: ", localSettings.get());
-    router.navigate("/profile/user/" + appState$.user.userId.get());
+    router.back();
   };
 
   return (
-    <SafeAreaView className="my-4 bg-neutral-50 dark:bg-neutral-950 min-h-screen h-full w-full">
+    <SafeAreaView className="w-full h-full min-h-screen my-4 bg-neutral-50 dark:bg-neutral-950">
       <H1>Settings</H1>
       <View className="flex flex-col justify-between px-6 grow">
         {/* SETTINGS */}
@@ -134,10 +134,10 @@ const page = observer(function SettingsPage() {
               APPEARANCE
             </Text>
             <Pressable
-              className="flex flex-row gap-1 items-center"
+              className="flex flex-row items-center gap-1"
               onPress={handleAppearanceSheetModalPress}
             >
-              <Text className="font-semibold text-neutral-900 dark:text-neutral-100 text-base">
+              <Text className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
                 {localSettings.appearance.get() === "SYSTEM"
                   ? "System default"
                   : localSettings.appearance.get() === "LIGHT_MODE"
@@ -191,7 +191,7 @@ const page = observer(function SettingsPage() {
               <BottomSheetView>
                 <View className="flex flex-col justify-between h-full">
                   <View className="px-6 py-2">
-                    <Text className="font-semibold text-lg text-neutral-900 dark:text-neutral-100 mb-4">
+                    <Text className="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
                       Appearance settings
                     </Text>
                     <Pressable
@@ -231,14 +231,14 @@ const page = observer(function SettingsPage() {
                       />
                     </Pressable>
                   </View>
-                  {/* <View className="flex flex-row space-x-6 px-6 mb-6 justify-between">
+                  {/* <View className="flex flex-row justify-between px-6 mb-6 space-x-6">
                     <Pressable className="grow">
-                      <Text className="p-3 text-center bg-neutral-200 dark:bg-neutral-800 rounded-md text-neutral-900 dark:text-neutral-100 font-semibold text-base">
+                      <Text className="p-3 text-base font-semibold text-center rounded-md bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100">
                         Cancel
                       </Text>
                     </Pressable>
                     <Pressable className="grow">
-                      <Text className="p-3 text-center bg-violet-200 rounded-md text-violet-900 font-semibold text-base">
+                      <Text className="p-3 text-base font-semibold text-center rounded-md bg-violet-200 text-violet-900">
                         Save
                       </Text>
                     </Pressable>
@@ -253,10 +253,10 @@ const page = observer(function SettingsPage() {
               LANGUAGE
             </Text>
             <Pressable
-              className="flex flex-row gap-1 items-center"
+              className="flex flex-row items-center gap-1"
               onPress={handleLanguageSheetModalPress}
             >
-              <Text className="font-semibold text-neutral-900 dark:text-neutral-100 text-base">
+              <Text className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
                 {localSettings.language.get() === "EN_GB"
                   ? "English"
                   : "Slovensky"}
@@ -308,7 +308,7 @@ const page = observer(function SettingsPage() {
               <BottomSheetView>
                 <View className="flex flex-col justify-between h-full">
                   <View className="px-6 py-2">
-                    <Text className="font-semibold text-lg text-neutral-900 dark:text-neutral-100 mb-4">
+                    <Text className="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
                       Language settings
                     </Text>
                     <Pressable
@@ -341,14 +341,14 @@ const page = observer(function SettingsPage() {
           </View>
         </View>
         {/* BOTTOM BUTTONS */}
-        <View className="flex flex-row space-x-6 mb-12 justify-between">
+        <View className="flex flex-row justify-between mb-12 space-x-6">
           <Pressable className="grow" onPress={handleCancel}>
-            <Text className="p-3 text-center bg-neutral-200 dark:bg-neutral-800 rounded-md text-neutral-900 dark:text-neutral-100 font-semibold text-base">
+            <Text className="p-3 text-base font-semibold text-center rounded-md bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100">
               Cancel
             </Text>
           </Pressable>
           <Pressable className="grow" onPress={handleUpdate}>
-            <Text className="p-3 text-center bg-violet-200 rounded-md text-violet-900 font-semibold text-base">
+            <Text className="p-3 text-base font-semibold text-center rounded-md bg-violet-200 text-violet-900">
               Save
             </Text>
           </Pressable>

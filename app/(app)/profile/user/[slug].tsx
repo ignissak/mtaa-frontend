@@ -10,7 +10,7 @@ const page = observer(function ProfilePage() {
   const targetUserId = slug === "me" ? appState$.user.userId.get() : slug;
 
   return (
-    <SafeAreaView className="bg-neutral-50 dark:bg-neutral-900 min-h-screen h-full mt-4">
+    <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
       <ProfileHeading targetUserId={targetUserId as string} />
     </SafeAreaView>
   );
