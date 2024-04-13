@@ -65,7 +65,7 @@ const page = observer(function Page() {
                   <PlaceCard
                     image={item.get()?.images[0].data}
                     title={item.get()?.name}
-                    subtitle={item.get()?.region}
+                    subtitle={item.get()?.type}
                     url={`/places/${item.get()?.id}`}
                   />
                 )}

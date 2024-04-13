@@ -531,7 +531,21 @@ const page = observer(function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="places/[slug]"
+        name="places/[slug]/index"
+        options={{
+          href: null,
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarStyle: {
+            borderTopWidth: 0,
+            elevation: 0,
+            backgroundColor:
+              colorScheme === "light" ? colors.white : colors.neutral[900],
+          },
+        }}
+      />
+      <Tabs.Screen
+        name="places/[slug]/reviews/index"
         options={{
           href: null,
           headerShown: false,

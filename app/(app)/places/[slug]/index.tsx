@@ -7,9 +7,9 @@ import {
   getPlaceById,
   getPlaceReviews,
   hasVisitedPlace,
-} from "../../../api/places";
-import { H1 } from "../../../components/Heading";
-import PlacePage from "../../../components/PlacePage";
+} from "../../../../api/places";
+import { H1 } from "../../../../components/Heading";
+import PlacePage from "../../../../components/PlacePage";
 import {
   IPlace,
   IReview,
@@ -19,7 +19,7 @@ import {
   findLoadedPlace,
   markPlaceVisited,
   setTotalReviewCountForPlace,
-} from "../../../tools/state";
+} from "../../../../tools/state";
 
 const page = observer(function PlacePageParent() {
   const { slug } = useLocalSearchParams();
@@ -122,7 +122,7 @@ const page = observer(function PlacePageParent() {
       >
         <Show if={isErrored$} else={() => <PlacePage place={place$} />}>
           <View>
-            <H1>Cannot load near places</H1>
+            <H1>Cannot load place</H1>
             <View className="px-6">
               <Text className="text-neutral-600 dark:text-neutral-400">
                 {isErrored$.get()}
