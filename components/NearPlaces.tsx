@@ -12,11 +12,13 @@ import { getNearPlaces } from "../api/places";
 import { ILocation, IPlace, appState$ } from "../tools/state";
 import { H1 } from "./Heading";
 import { PlaceCard } from "./PlaceCard";
+import { useTranslation } from "react-i18next";
 
 const page = observer(function Page() {
   const isLoadingLocation$ = useObservable(true);
   const isErrored$ = useObservable<boolean | string>(false);
   const nearPlaces$ = useObservable<IPlace[]>([]); // Array to store the fetched near places
+  const { i18n, t } = useTranslation();
 
   useEffect(() => {
     const getLocation = async () => {
@@ -95,7 +97,9 @@ const page = observer(function Page() {
         if={isErrored$}
         else={() => (
           <View>
-            <H1>Near You</H1>
+            <H1>
+              {t("headings.near_you")}
+            </H1>
             <ScrollView className="px-6 mb-6" horizontal={true}>
               <For each={nearPlaces$}>
                 {(item) => (

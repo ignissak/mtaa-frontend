@@ -1,0 +1,87 @@
+{
+  "auth": {
+    "email": "E-mailová adresa",
+    "password": "Heslo",
+    "log_in": "Prihlásenie"
+  },
+  "headings": {
+    "near_you": "Blízko Vás",
+    "trending": "Trendujúce miesta",
+    "search": "Vyhľadávanie",
+    "camera_access": "Povoľte prístup ku kamere",
+    "error": "Došlo k chybe!",
+    "processing_qr": "Spracovávame dáta QR kódu...",
+    "scan_qr": "Skenovanie QR kódu",
+    "reviews": "Recenzie"
+  },
+  "errors": {
+    "load_near_places": "Nedajú sa načítať blízke miesta",
+    "load_trending_places": "Nedajú sa načítať trendujúce miesta",
+    "allow_location": "Uistite sa, že ste povolili prístup k polohe v nastaveniach.",
+    "general": "Jejda! Nastala chyba."
+  },
+  "actions": {
+    "open_app_settings": "Otvoriť nastavenia aplikácie",
+    "show_all_reviews": "Zobraziť všetky recenzie",
+    "mark_as_not_visited": "Označiť ako nenavštívené",
+    "write_review": "Napísať recenziu",
+    "i_am_here": "Som tu teraz",
+    "visited_place": "Toto miesto ste navštívili",
+    "create_account": "Vytvoriť nový účet",
+    "log_in": "Prihlásiť sa",
+    "search": "Hľadať"
+  },
+  "place": {
+    "about": "Informácie",
+    "location": "Poloha",
+    "no_rating": "Žiadne hodnotenia",
+    "no_reviews_text": "Zatiaľ nikto neposlal recenziu :(",
+    "no_reviews_title": "Žiadne recenzie",
+    "reviews_count": "{{count}} recenzií"
+  },
+  "profile": {
+    "log_out": "Odhlásiť sa",
+    "points_count": "{{count}} bodov"
+  },
+  "search": {
+    "results_count": "{{count}} výsledkov",
+    "search_placeholder": "Hľadať miesta",
+    "no_results": "Nenašli sa žiadne výsledky",
+    "filters": "Filtre",
+    "categories": "Kategórie",
+    "regions": "Regiony"
+  },
+  "reviews": {
+    "reviews_count": "{{count}} recenzií",
+    "no_reviews": "Zatiaľ žiadne recenzie"
+  },
+  "scanner": {
+    "camera_access_text": "Prístup k fotoaparátu je potrebný pre správne fungovanie aplikácie. Prosím, povolte prístup k fotoaparátu.",
+    "processing_qr_text": "Prosím, počkajte, kým spracujeme dáta QR kódu.",
+    "scan_text": "Ak ste na mieste miesta, nájdite QR kód na skenovanie."
+  },
+  "constants": {
+    "place_type": {
+      "parks_and_gardens": "Parky a Záhrady",
+      "churches": "Kostoly",
+      "castles": "Hrady",
+      "museums": "Múzeá",
+      "galleries": "Galérie",
+      "monuments": "Pamätihodnosti",
+      "memorials": "Pamätníky",
+      "statues": "Sochy",
+      "wells_and_springs": "Pozdĺžne a Pramene",
+      "lakes": "Jazerá",
+      "rivers": "Rieky",
+      "mountains": "Hory",
+      "caves": "Jaskyne",
+      "waterfalls": "Vodopády",
+      "mills": "Mlyny",
+      "bridges": "Mosty",
+      "towers": "Veže",
+      "zoo": "Zoo",
+      "palaces": "Paláce",
+      "other": "Iné"
+    }
+  }
+}

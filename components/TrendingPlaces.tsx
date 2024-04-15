@@ -75,7 +75,7 @@ const page = observer(function Page() {
         )}
       >
         <View>
-          <H1>Cannot load near places</H1>
+          <H1>Cannot load trending places</H1>
           <View className="px-6">
             <Text className="text-neutral-600 dark:text-neutral-400">
               {isErrored$.get()}

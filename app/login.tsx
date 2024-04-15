@@ -13,6 +13,7 @@ import { Path, Svg } from "react-native-svg";
 import colors from "tailwindcss/colors";
 import { login } from "../api/auth";
 import { appState$ } from "../tools/state";
+import { useTranslation } from "react-i18next";
 
 export default function Login() {
   const [email, setEmail] = React.useState("");
@@ -22,6 +23,7 @@ export default function Login() {
   const [passwordError, setPasswordError] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (appState$.user.token.get()) {
@@ -78,7 +80,7 @@ export default function Login() {
   return (
     <SafeAreaView className="flex items-start justify-center h-full min-h-screen px-6 bg-neutral-50 dark:bg-neutral-900">
       <Text className="mb-4 text-2xl font-bold text-neutral-900 dark:text-neutral-100">
-        Log In
+        {t("auth.log_in")}
       </Text>
       <View className="flex w-full gap-3">
         {/* EMAIL */}

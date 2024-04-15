@@ -353,7 +353,7 @@ const page = observer(function Page({
                       router.push(`/places/${place.id.get()}/reviews`);
                     }}
                   >
-                    <Text className="font-semibold text-center text-neutral-900 dark:text-neutral-100">
+                    <Text className="font-semibold text-center uppercase text-neutral-900 dark:text-neutral-100">
                       SHOW ALL REVIEWS
                     </Text>
                   </Pressable>
