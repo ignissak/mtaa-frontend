@@ -1,20 +1,20 @@
 import { router } from "expo-router";
 import { Image, Pressable, Text, View } from "react-native";
 
-export function PlaceCard(props: {
+export function PlaceSearchCard(props: {
   image?: string;
   title?: string;
   subtitle?: string;
   url: string;
 }) {
   const reroute = () => {
-    router.navigate(props.url);
+    router.push(props.url);
     console.log("Rerouting to:", props.url);
   };
 
   return (
-    <Pressable onPress={reroute}>
-      <View className="w-64 h-40 mr-3 overflow-hidden rounded-md">
+    <Pressable onPress={reroute} className="px-6">
+      <View className="w-full h-40 mb-3 overflow-hidden rounded-md bg-white-100 dark:bg-neutral-800">
         <Image
           className="absolute inset-0 object-cover w-full h-full"
           source={{ uri: `data:image/jpg;base64,${props.image}` }}
