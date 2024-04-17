@@ -6,7 +6,7 @@
   },
   "headings": {
     "near_you": "Blízko Vás",
-    "trending": "Trendujúce miesta",
+    "trending": "Populárne miesta",
     "search": "Vyhľadávanie",
     "camera_access": "Povoľte prístup ku kamere",
     "error": "Došlo k chybe!",
@@ -18,7 +18,12 @@
     "load_near_places": "Nedajú sa načítať blízke miesta",
     "load_trending_places": "Nedajú sa načítať trendujúce miesta",
     "allow_location": "Uistite sa, že ste povolili prístup k polohe v nastaveniach.",
-    "general": "Jejda! Nastala chyba."
+    "general": "Jejda! Nastala chyba.",
+    "invalid_login": "Neplatné prihlasovacie údaje",
+    "invalid_email": "Neplatná e-mailová adresa",
+    "failed_login": "Nepodarilo sa prihlásiť",
+    "email_required": "E-mailová adresa je povinná",
+    "password_required": "Heslo je povinné"
   },
   "actions": {
     "open_app_settings": "Otvoriť nastavenia aplikácie",
@@ -29,7 +34,11 @@
     "visited_place": "Toto miesto ste navštívili",
     "create_account": "Vytvoriť nový účet",
     "log_in": "Prihlásiť sa",
-    "search": "Hľadať"
+    "search": "Hľadať",
+    "cancel": "Zrušiť",
+    "save": "Uložiť",
+    "search_for_places": "Hľadať miesta",
+    "type_your_password": "Napíšte svoje heslo"
   },
   "place": {
     "about": "Informácie",
@@ -60,6 +69,17 @@
     "processing_qr_text": "Prosím, počkajte, kým spracujeme dáta QR kódu.",
     "scan_text": "Ak ste na mieste miesta, nájdite QR kód na skenovanie."
   },
+  "settings": {
+    "display_name": "Meno",
+    "show_visited_public": "Zobraziť navštívené miesta verejne",
+    "appearance": "Vzhľad",
+    "language": "Jazyk",
+    "appearance_settings": "Nastavenia vzhľadu",
+    "language_settings": "Nastavenia jazyka",
+    "system": "Systémový",
+    "dark": "Tmavý",
+    "light": "Svetlý"
+  },
   "constants": {
     "place_type": {
       "parks_and_gardens": "Parky a Záhrady",
@@ -82,6 +102,18 @@
       "zoo": "Zoo",
       "palaces": "Paláce",
       "other": "Iné"
-    }
+    },
+    "region": {
+      "bratislava": "Bratislava",
+      "trnava": "Trnava",
+      "trencin": "Trenčín",
+      "nitra": "Nitra",
+      "zilina": "Žilina",
+      "banska_bystrica": "Banská Bystrica",
+      "presov": "Prešov",
+      "kosice": "Košice",
+      "other": "Other"
+    },
+    "loading": "Načítavanie..."
   }
 }

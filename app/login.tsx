@@ -35,9 +35,9 @@ export default function Login() {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const valid = regex.test(email);
     if (!valid) {
-      setEmailError("Invalid email address");
+      setEmailError(t('errors.invalid_email'));
     } else if (email.length === 0) {
-      setEmailError("Email is required");
+      setEmailError(t('errors.email_required'));
     } else {
       setEmailError("");
     }
@@ -45,7 +45,7 @@ export default function Login() {
 
   const validatePassword = () => {
     if (password.length === 0) {
-      setPasswordError("Password is required");
+      setPasswordError(t('errors.password_required'));
     } else {
       setPasswordError("");
     }
@@ -53,10 +53,10 @@ export default function Login() {
 
   const handleSignIn = async () => {
     if (email.length === 0) {
-      setEmailError("Email is required");
+      setEmailError(t('errors.email_required'));
     }
     if (password.length === 0) {
-      setPasswordError("Password is required");
+      setPasswordError(t('errors.password_required'));
     }
     if (emailError.length > 0) {
       return;
@@ -65,14 +65,14 @@ export default function Login() {
     const json = await login(email, password);
 
     if (json.data.status === 401) {
-      setPasswordError("Invalid login credentials");
+      setPasswordError(t('errors.invalid_login'));
     } else if (json.data.status === 200) {
       console.log("Logged in");
       setPasswordError("");
       router.replace("/explore");
     } else {
       console.log("Failed to log in", json);
-      setPasswordError("Failed to log in");
+      setPasswordError(t('errors.failed_login'));
     }
     setIsLoading(false);
   };
@@ -86,7 +86,7 @@ export default function Login() {
         {/* EMAIL */}
         <View className="flex w-full gap-1">
           <Text className="text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
-            EMAIL ADDRESS
+            {t('auth.email')}
           </Text>
           <View
             className={`p-3 bg-neutral-100 dark:bg-neutral-800 rounded-md w-full flex-row items-center justify-between${
@@ -111,7 +111,7 @@ export default function Login() {
         {/* PASSWORD */}
         <View className="flex w-full gap-1">
           <Text className="text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
-            PASSWORD
+            {t('auth.password')}
           </Text>
           <View
             className={`p-3 bg-neutral-100 dark:bg-neutral-800 rounded-md w-full flex-row items-center justify-between${
@@ -122,7 +122,7 @@ export default function Login() {
               value={password}
               onChangeText={setPassword}
               secureTextEntry={!showPassword}
-              placeholder="Type your password"
+              placeholder={t('actions.type_your_password')}
               placeholderTextColor={"#a3a3a3"}
               autoCapitalize="none"
               onEndEditing={validatePassword}
@@ -198,13 +198,14 @@ export default function Login() {
             <Text className="text-red-500">{passwordError}</Text>
           )}
         </View>
-        <View className="flex items-end w-full">
+        {/* <View className="flex items-end w-full">
           <Pressable>
             <Text className="text-base font-semibold text-violet-700">
-              Forgot your password?
+              Forgot your password? 
             </Text>
           </Pressable>
-        </View>
+        </View> 
+        Backend is not ready for this functionality. */}
         <Pressable
           className="flex items-center justify-center w-full p-3 rounded-md bg-violet-200"
           onPress={handleSignIn}
@@ -213,13 +214,13 @@ export default function Login() {
             {isLoading ? (
               <ActivityIndicator color={colors.violet[700]} />
             ) : (
-              "Log In"
+              t('actions.log_in')
             )}
           </Text>
         </Pressable>
         <Pressable className="w-full p-3 rounded-md bg-neutral-100 dark:bg-neutral-800">
           <Text className="text-base font-semibold text-center text-neutral-900 dark:text-neutral-100">
-            Create New Account
+            {t('actions.create_account')}
           </Text>
         </Pressable>
       </View>

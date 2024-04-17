@@ -36,6 +36,7 @@ if (!init) {
         loadPath: "./{{lng}}.json",
       },
     });
+  init = true;
 }
 
 const local = Localization.getLocales()[0].languageCode;
@@ -44,6 +45,9 @@ if (local !== null) {
 }
 
 appState$.savedSettings.language.onChange((language) => {
+  if (!language.value) {
+    return;
+  }
   console.log("Changed language to:", language.value);
   i18n.changeLanguage(language.value.split("_")[0].toLocaleLowerCase());
 });

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { appState$ } from "../tools/state";
+import { appData$, appState$ } from "../tools/state";
 
 export const login = async (email: string, password: string) => {
   const res = await axios.post(
@@ -77,5 +77,9 @@ export const testAuth = async (token: string | null) => {
 };
 
 export const signOut = async () => {
-  appState$.user.set({});
+  appState$.user.delete();
+  appState$.localSettings.delete();
+  appState$.savedSettings.delete();
+  appData$.loadedPlaces.delete();
+  appData$.socket.delete();
 };

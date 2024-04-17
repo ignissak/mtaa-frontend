@@ -7,6 +7,7 @@ import { swrGET } from "../api";
 import { signOut } from "../api/auth";
 import { appState$ } from "../tools/state";
 import { observer } from "@legendapp/state/react";
+import { useTranslation } from "react-i18next";
 
 const page = observer(function ProfileHeading({
   targetUserId,
@@ -14,6 +15,7 @@ const page = observer(function ProfileHeading({
   targetUserId: string;
 }) {
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
 
   const { data, error, isLoading } = useSWR<
     {
@@ -90,7 +92,7 @@ const page = observer(function ProfileHeading({
             }}
           >
             <Text className="text-base font-semibold text-red-500">
-              Log out
+              {t("profile.log_out")}
             </Text>
           </Pressable>
         </View>
@@ -101,7 +103,9 @@ const page = observer(function ProfileHeading({
               {appState$.savedSettings.name.get()}
             </Text>
             <Text className="text-base text-neutral-600 dark:text-neutral-400">
-              {appState$.user.points.get()} points
+              {t("profile.points_count", {
+                count: appState$.user.points.get(),
+              })}
             </Text>
           </View>
           <View className="flex flex-row gap-8">
