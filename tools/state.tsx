@@ -1,18 +1,18 @@
-import { observable, opaqueObject } from "@legendapp/state";
+import { observable, opaqueObject } from '@legendapp/state';
 import {
   configureObservablePersistence,
   persistObservable,
-} from "@legendapp/state/persist";
-import { ObservablePersistAsyncStorage } from "@legendapp/state/persist-plugins/async-storage";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { LocationObjectCoords } from "expo-location";
-import { NativeWindStyleSheet } from "nativewind";
-import { Appearance } from "react-native";
-import { Socket, io } from "socket.io-client";
+} from '@legendapp/state/persist';
+import { ObservablePersistAsyncStorage } from '@legendapp/state/persist-plugins/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LocationObjectCoords } from 'expo-location';
+import { NativeWindStyleSheet } from 'nativewind';
+import { Appearance } from 'react-native';
+import { Socket, io } from 'socket.io-client';
 
-export type IAppearance = "SYSTEM" | "LIGHT_MODE" | "DARK_MODE";
+export type IAppearance = 'SYSTEM' | 'LIGHT_MODE' | 'DARK_MODE';
 
-export type ILanguage = "EN_GB" | "SK_SK";
+export type ILanguage = 'EN_GB' | 'SK_SK';
 
 export type ISettings = {
   language: ILanguage;
@@ -22,6 +22,8 @@ export type ISettings = {
 };
 
 export type IUser = {
+  name?: string;
+  id?: number;
   token?: string;
   userId?: number;
   points?: number;
@@ -50,6 +52,17 @@ export type IReview = {
   images: IImage[];
 };
 
+export type IUserReview = {
+  place: {
+    id: number;
+    name: string;
+    type: string;
+  };
+  id: number;
+  rating: number;
+  comment: string;
+};
+
 export type IPlace = {
   id: number;
   name: string;
@@ -71,14 +84,14 @@ export type IPlace = {
 
 export const appState$ = observable({
   savedSettings: {
-    language: "EN_GB",
-    appearance: "SYSTEM",
+    language: 'EN_GB',
+    appearance: 'SYSTEM',
     visitedPublic: true,
     name: undefined,
   } as ISettings,
   localSettings: {
-    language: "EN_GB",
-    appearance: "SYSTEM",
+    language: 'EN_GB',
+    appearance: 'SYSTEM',
     visitedPublic: true,
     name: undefined,
   } as ISettings,
@@ -145,7 +158,7 @@ export const setTotalReviewCountForPlace = (id: number, count: number) => {
 export const initSocket = () => {
   // Initialize socket.io
   const socket = io(process.env.EXPO_PUBLIC_API_URL as string, {
-    transports: ["websocket", "polling"],
+    transports: ['websocket', 'polling'],
     reconnection: true,
     reconnectionDelay: 500,
     reconnectionAttempts: 10,
@@ -154,12 +167,12 @@ export const initSocket = () => {
     },
   });
 
-  socket.on("connect", () => {
-    console.log("Socket connected");
+  socket.on('connect', () => {
+    console.log('Socket connected');
   });
 
-  socket.on("disconnect", () => {
-    console.log("Socket disconnected");
+  socket.on('disconnect', () => {
+    console.log('Socket disconnected');
   });
 
   appData$.socket.set(opaqueObject(socket));
@@ -167,7 +180,7 @@ export const initSocket = () => {
 
 export const getSocket = () => {
   if (!appData$.socket.get()) {
-    console.log("Initializing socket");
+    console.log('Initializing socket');
     initSocket();
   }
   return appData$.socket;
@@ -188,7 +201,7 @@ configureObservablePersistence({
 });
 
 persistObservable(appState$, {
-  local: "appStore",
+  local: 'appStore',
 });
 
 appState$.savedSettings.onChange((newSettings) => {
@@ -198,14 +211,14 @@ appState$.savedSettings.onChange((newSettings) => {
   
   const setColorScheme = Appearance.setColorScheme;
   const setColorSchemeNativeWind = NativeWindStyleSheet.setColorScheme;
-  if (newSettings.value.appearance === "SYSTEM") {
+  if (newSettings.value.appearance === 'SYSTEM') {
     setColorScheme(null);
-    setColorSchemeNativeWind("system");
-  } else if (newSettings.value.appearance === "LIGHT_MODE") {
-    setColorScheme("light");
-    setColorSchemeNativeWind("light");
+    setColorSchemeNativeWind('system');
+  } else if (newSettings.value.appearance === 'LIGHT_MODE') {
+    setColorScheme('light');
+    setColorSchemeNativeWind('light');
   } else {
-    setColorScheme("dark");
-    setColorSchemeNativeWind("dark");
+    setColorScheme('dark');
+    setColorSchemeNativeWind('dark');
   }
 });

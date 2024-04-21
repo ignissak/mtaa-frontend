@@ -12,7 +12,8 @@
     "error": "Došlo k chybe!",
     "processing_qr": "Spracovávame dáta QR kódu...",
     "scan_qr": "Skenovanie QR kódu",
-    "reviews": "Recenzie"
+    "reviews": "Recenzie",
+    "leaderboard": "Rebríček"
   },
   "errors": {
     "load_near_places": "Nedajú sa načítať blízke miesta",
@@ -23,7 +24,8 @@
     "invalid_email": "Neplatná e-mailová adresa",
     "failed_login": "Nepodarilo sa prihlásiť",
     "email_required": "E-mailová adresa je povinná",
-    "password_required": "Heslo je povinné"
+    "password_required": "Heslo je povinné",
+    "visited_places": "Nepodarilo sa načítať navštívené miesta"
   },
   "actions": {
     "open_app_settings": "Otvoriť nastavenia aplikácie",
@@ -50,7 +52,11 @@
   },
   "profile": {
     "log_out": "Odhlásiť sa",
-    "points_count": "{{count}} bodov"
+    "points_count": "{{count}} bodov",
+    "my_reviews": "Moje recenzie",
+    "visited_places": "Navštívené miesta",
+    "reviews_count": "{{count}} recenzií",
+    "visited_count": "{{count}} navštívených"
   },
   "search": {
     "results_count": "{{count}} výsledkov",
@@ -79,6 +85,11 @@
     "system": "Systémový",
     "dark": "Tmavý",
     "light": "Svetlý"
+  },
+  "leaderboard": {
+    "last_30_days_top": "Najlepší za posledných 30 dní",
+    "all_time_top": "Najlepší všetkých čias",
+    "points_count": "{{count}} bodov"
   },
   "constants": {
     "place_type": {
