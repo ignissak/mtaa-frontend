@@ -9,6 +9,7 @@ import { FlashList } from "@shopify/flash-list";
 import * as Haptics from "expo-haptics";
 import * as Location from "expo-location";
 import { useCallback, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
   Keyboard,
@@ -35,9 +36,9 @@ import {
 
 const page = observer(function SearchPage() {
   const query = useObservable("");
-  const allCategories = useObservable(Object.values(PlaceType));
+  const allCategories = useObservable(Object.entries(PlaceType));
   const categories = useObservable([] as string[]);
-  const allRegions = useObservable(Object.values(Region));
+  const allRegions = useObservable(Object.entries(Region));
   const regions = useObservable([] as Region[]);
   const colorScheme = useColorScheme();
 
@@ -54,6 +55,7 @@ const page = observer(function SearchPage() {
   const snapPoints = useMemo(() => ["50%"], []);
 
   const toast = useToast();
+  const { t } = useTranslation();
 
   const handleFiltersSheetModalPress = useCallback(() => {
     if (loading.get()) return;
@@ -185,7 +187,7 @@ const page = observer(function SearchPage() {
     );
 
     if (res.status !== 200) {
-      toast.show("Error fetching search results.", { type: "danger" });
+      toast.show(t('toasts.fetch_error'), { type: "danger" });
       return;
     }
 
@@ -203,10 +205,10 @@ const page = observer(function SearchPage() {
 
   return (
     <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
-      <H1>Search</H1>
+      <H1>{t("headings.search")}</H1>
 
       <Text className="px-6 mb-4 text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
-        VIEWING {totalResults.get()} RESULTS
+        {t("search.results_count", { count: totalResults.get() })}
       </Text>
 
       <View className="flex flex-col h-full pb-24 ">
@@ -218,7 +220,7 @@ const page = observer(function SearchPage() {
             <Reactive.TextInput
               $value={query}
               className="text-base rounded-md text-neutral-900 dark:text-neutral-100"
-              placeholder="Search for places"
+              placeholder={t('actions.search_for_places')}
               placeholderTextColor={colors.neutral[400]}
               onSubmitEditing={handleSearch}
               $editable={!loading.get()}
@@ -269,7 +271,7 @@ const page = observer(function SearchPage() {
           if={() => error.get().length === 0}
           else={() => (
             <View className="flex items-center justify-center grow">
-              <Text className="text-red-500">Oh no! There was an error.</Text>
+              <Text className="text-red-500">{t('errors.general')}</Text>
             </View>
           )}
         >
@@ -281,7 +283,7 @@ const page = observer(function SearchPage() {
                   if={() => loading.get()}
                   else={() => (
                     <Text className="text-neutral-600 dark:text-neutral-400">
-                      Search for something...
+                      {t('search.search_placeholder')}
                     </Text>
                   )}
                 >
@@ -303,7 +305,7 @@ const page = observer(function SearchPage() {
               else={() => (
                 <View className="flex items-center justify-center grow">
                   <Text className="text-neutral-600 dark:text-neutral-400">
-                    No results found. Try searching for something else.
+                    {t('search.no_results')}
                   </Text>
                 </View>
               )}
@@ -316,7 +318,7 @@ const page = observer(function SearchPage() {
                     key={item.id}
                     url={`/places/${item.id}`}
                     title={item.name}
-                    subtitle={item.type}
+                    subtitle={t('constants.place_type.' + item.type.toLocaleLowerCase())}
                     image={item.images[0].data}
                   />
                 )}
@@ -350,50 +352,50 @@ const page = observer(function SearchPage() {
           <View className="flex flex-col justify-between h-full">
             <View className="px-6 py-2">
               <Text className="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                Filters
+                {t('search.filters')}
               </Text>
 
               <Text className="mb-2 text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
-                CATEGORIES
+                {t('search.categories')}
               </Text>
 
               <View className="flex flex-row flex-wrap gap-2 mb-3">
                 {allCategories.get().map((category) => (
                   <Pressable
-                    key={category}
-                    onPress={() => handleCategoryPress(category)}
+                    key={category[0]}
+                    onPress={() => handleCategoryPress(category[1])}
                   >
                     <Text
                       className={`text-sm text-neutral-900 dark:text-neutral-100 px-3 py-1 rounded-md border border-neutral-200 dark:border-neutral-800 ${
-                        categories.get().includes(category)
+                        categories.get().includes(category[1])
                           ? "bg-neutral-200 dark:bg-neutral-800"
                           : ""
                       }`}
                     >
-                      {category.trim()}
+                      {t('constants.place_type.' + category[0].toLocaleLowerCase())}
                     </Text>
                   </Pressable>
                 ))}
               </View>
 
               <Text className="mb-2 text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
-                REGIONS
+                {t('search.regions')}
               </Text>
 
               <View className="flex flex-row flex-wrap gap-2 mb-3">
                 {allRegions.get().map((region) => (
                   <Pressable
-                    key={region}
-                    onPress={() => handleRegionPress(region)}
+                    key={region[0]}
+                    onPress={() => handleRegionPress(region[1])}
                   >
                     <Text
                       className={`text-sm text-neutral-900 dark:text-neutral-100 px-3 py-1 rounded-md border border-neutral-200 dark:border-neutral-800 ${
-                        regions.get().includes(region)
+                        regions.get().includes(region[1])
                           ? "bg-neutral-200 dark:bg-neutral-800"
                           : ""
                       }`}
                     >
-                      {region}
+                      {t('constants.region.' + region[0].toLocaleLowerCase())}
                     </Text>
                   </Pressable>
                 ))}
@@ -403,7 +405,7 @@ const page = observer(function SearchPage() {
             <View className="flex flex-row justify-between px-6 mb-8 space-x-6">
               <Pressable className="grow" onPress={handleSearch}>
                 <Text className="p-3 text-base font-semibold text-center rounded-md bg-violet-200 text-violet-900">
-                  Search
+                  {t('actions.search')}
                 </Text>
               </Pressable>
             </View>

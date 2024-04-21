@@ -7,6 +7,7 @@ import { swrGET } from "../api";
 import { signOut } from "../api/auth";
 import { appState$ } from "../tools/state";
 import { observer } from "@legendapp/state/react";
+import { useTranslation } from "react-i18next";
 
 const page = observer(function ProfileHeading({
   targetUserId,
@@ -14,6 +15,7 @@ const page = observer(function ProfileHeading({
   targetUserId: string;
 }) {
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
 
   const { data, error, isLoading } = useSWR<
     {
@@ -63,14 +65,14 @@ const page = observer(function ProfileHeading({
 
   if (isLoading && !data && !error) {
     return (
-      <View className="flex flex-row w-full justify-between px-6">
+      <View className="flex flex-row justify-between w-full px-6">
         <View className="flex flex-1 gap-2">
-          <View className="bg-neutral-100 dark:bg-neutral-800 h-6 w-1/2 rounded-md"></View>
-          <View className="bg-neutral-100 dark:bg-neutral-800 h-4 w-1/3 rounded-md"></View>
+          <View className="w-1/2 h-6 rounded-md bg-neutral-100 dark:bg-neutral-800"></View>
+          <View className="w-1/3 h-4 rounded-md bg-neutral-100 dark:bg-neutral-800"></View>
         </View>
-        <View className="flex gap-8 flex-row">
-          <View className="bg-neutral-100 dark:bg-neutral-800 h-6 w-6 rounded-md"></View>
-          <View className="bg-neutral-100 dark:bg-neutral-800 h-6 w-6 rounded-md"></View>
+        <View className="flex flex-row gap-8">
+          <View className="w-6 h-6 rounded-md bg-neutral-100 dark:bg-neutral-800"></View>
+          <View className="w-6 h-6 rounded-md bg-neutral-100 dark:bg-neutral-800"></View>
         </View>
       </View>
     );
@@ -79,8 +81,8 @@ const page = observer(function ProfileHeading({
   return (
     <View id="profile.details">
       {error ? (
-        <View className="flex items-center flex-col gap-4 w-full px-6 mb-4">
-          <Text className=" text-red-500 font-semibold text-base">
+        <View className="flex flex-col items-center w-full gap-4 px-6 mb-4">
+          <Text className="text-base font-semibold text-red-500 ">
             {error.message}
           </Text>
           <Pressable
@@ -89,22 +91,24 @@ const page = observer(function ProfileHeading({
               router.replace("/login");
             }}
           >
-            <Text className="text-red-500 font-semibold text-base">
-              Log out
+            <Text className="text-base font-semibold text-red-500">
+              {t("profile.log_out")}
             </Text>
           </Pressable>
         </View>
       ) : (
-        <View className="flex justify-between items-center flex-row w-full px-6 mb-4">
+        <View className="flex flex-row items-center justify-between w-full px-6 mb-4">
           <View>
-            <Text className="text-xl text-neutral-900 dark:text-neutral-100 font-semibold">
+            <Text className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
               {appState$.savedSettings.name.get()}
             </Text>
             <Text className="text-base text-neutral-600 dark:text-neutral-400">
-              {appState$.user.points.get()} points
+              {t("profile.points_count", {
+                count: appState$.user.points.get(),
+              })}
             </Text>
           </View>
-          <View className="flex gap-8 flex-row">
+          <View className="flex flex-row gap-8">
             <Pressable
               onPress={() => {
                 router.push(`/profile/settings`);

@@ -25,7 +25,7 @@ const page = observer(function HomeLayout() {
           renderType={{
             success: (toast) => (
               <View className="w-full px-6 my-2">
-                <View className="p-3 bg-neutral-100 dark:bg-neutral-800 rounded-md border-l-2 flex flex-row items-center space-x-2">
+                <View className="flex flex-row items-center p-3 space-x-2 border-l-2 rounded-md bg-neutral-100 dark:bg-neutral-800">
                   <Svg
                     width="20px"
                     height="20px"
@@ -42,7 +42,7 @@ const page = observer(function HomeLayout() {
                       strokeLinejoin="round"
                     ></Path>
                   </Svg>
-                  <Text className="text-neutral-900 dark:text-neutral-100 text-sm ">
+                  <Text className="text-sm text-neutral-900 dark:text-neutral-100 ">
                     {toast.message}
                   </Text>
                 </View>
@@ -50,7 +50,7 @@ const page = observer(function HomeLayout() {
             ),
             danger: (toast) => (
               <View className="w-full px-6 my-2">
-                <View className="p-3 bg-neutral-100 dark:bg-neutral-800 rounded-md border-l-2 flex flex-row items-center space-x-2">
+                <View className="flex flex-row items-center p-3 space-x-2 border-l-2 rounded-md bg-neutral-100 dark:bg-neutral-800">
                   <Svg
                     width="20px"
                     height="20px"
@@ -81,7 +81,7 @@ const page = observer(function HomeLayout() {
                       strokeLinejoin="round"
                     ></Path>
                   </Svg>
-                  <Text className="text-neutral-900 dark:text-neutral-100 text-sm ">
+                  <Text className="text-sm text-neutral-900 dark:text-neutral-100 ">
                     {toast.message}
                   </Text>
                 </View>
@@ -89,7 +89,7 @@ const page = observer(function HomeLayout() {
             ),
             loading: (toast) => (
               <View className="w-full px-6 my-2">
-                <View className="p-3 bg-neutral-100 dark:bg-neutral-800 rounded-md flex flex-row items-center space-x-2">
+                <View className="flex flex-row items-center p-3 space-x-2 rounded-md bg-neutral-100 dark:bg-neutral-800">
                   <ActivityIndicator
                     size="small"
                     color={
@@ -98,7 +98,7 @@ const page = observer(function HomeLayout() {
                         : colors.neutral[400]
                     }
                   />
-                  <Text className="text-neutral-900 dark:text-neutral-100 text-sm ">
+                  <Text className="text-sm text-neutral-900 dark:text-neutral-100 ">
                     {toast.message}
                   </Text>
                 </View>

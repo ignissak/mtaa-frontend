@@ -18,6 +18,7 @@ import colors from "tailwindcss/colors";
 import { visitPlace } from "../../api/places";
 import { H1 } from "../../components/Heading";
 import { ILocation, appState$, markPlaceVisited } from "../../tools/state";
+import { useTranslation } from "react-i18next";
 
 const page = observer(function ScannerPage() {
   const [permission, requestPermission] = useCameraPermissions();
@@ -26,6 +27,7 @@ const page = observer(function ScannerPage() {
   const processing = useObservable(false);
   const colorScheme = useColorScheme();
   const isErrored = useObservable<boolean | string>(false);
+  const { t } = useTranslation();
 
   const addCode = async (code: string) => {
     try {
@@ -56,7 +58,7 @@ const page = observer(function ScannerPage() {
       if (data.error) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
         if (res.status === 409) {
-          toast.show("You have already visited this place", { type: "danger" });
+          toast.show(t('toasts.already_visited'), { type: "danger" });
           return;
         }
         toast.show(data.error, { type: "danger" });
@@ -65,12 +67,12 @@ const page = observer(function ScannerPage() {
       if (res.status === 200) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
         router.navigate("/places/" + data.data.placeId);
-        toast.show("Successfully marked place as visited", { type: "success" });
+        toast.show(t('toasts.marked_as_visited'), { type: "success" });
         markPlaceVisited(data.data.placeId);
         appState$.user.points.set((p) => p + data.data.place.points);
       }
     } catch (e) {
-      toast.show("Error processing QR code", { type: "danger" });
+      toast.show(t('toasts.error_qr'), { type: "danger" });
       console.log(e);
     } finally {
       processing.set(false);
@@ -99,10 +101,9 @@ const page = observer(function ScannerPage() {
   if (permission?.status === "undetermined") {
     return (
       <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
-        <H1>Allow camera access</H1>
+        <H1>{t('headings.camera_access')}</H1>
         <Text className="text-neutral-600 dark:text-neutral-400">
-          Camera access is required for proper application functionality. Please
-          allow camera access.
+          {t('scanner.camera_access_text')}
         </Text>
       </SafeAreaView>
     );
@@ -111,7 +112,7 @@ const page = observer(function ScannerPage() {
   if (isErrored.get()) {
     return (
       <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
-        <H1>There was an error!</H1>
+        <H1>{t('headings.error')}</H1>
         <View className="px-6">
           <Text className="text-neutral-600 dark:text-neutral-400">
             {isErrored.get()}
@@ -121,7 +122,7 @@ const page = observer(function ScannerPage() {
             onPress={Linking.openSettings}
           >
             <Text className="text-base font-semibold text-center text-neutral-900 dark:text-neutral-100">
-              Open App Settings
+              {t('actions.open_app_settings')}
             </Text>
           </Pressable>
         </View>
@@ -132,9 +133,9 @@ const page = observer(function ScannerPage() {
   if (processing.get()) {
     return (
       <SafeAreaView className="flex flex-col h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
-        <H1>Processing QR code data...</H1>
+        <H1>{t('headings.processing_qr')}</H1>
         <Text className="px-6 text-neutral-600 dark:text-neutral-400">
-          Please wait while we process the QR code data.
+          {t('scanner.processing_qr_text')}
         </Text>
 
         <View className="flex items-center justify-center grow">
@@ -151,9 +152,9 @@ const page = observer(function ScannerPage() {
 
   return (
     <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
-      <H1>Scan a QR code</H1>
+      <H1>{t('headings.scan_qr')}</H1>
       <Text className="px-6 mb-2 text-neutral-600 dark:text-neutral-400">
-        If you are at the location of a place, find a QR code to scan.
+        {t('scanner.scan_text')}
       </Text>
       <View className="h-full px-6">
         <CameraView
@@ -167,7 +168,7 @@ const page = observer(function ScannerPage() {
             addCode(data.data);
           }}
           onMountError={() => {
-            toast.show("Camera error", { type: "danger" });
+            toast.show(t('toasts.camera_error'), { type: "danger" });
           }}
         />
       </View>

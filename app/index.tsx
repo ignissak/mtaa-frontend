@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import { testAuth } from "../api/auth";
 import { appState$ } from "../tools/state";
+import "../tools/locales/index";
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();

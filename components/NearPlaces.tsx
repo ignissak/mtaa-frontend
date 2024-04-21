@@ -12,11 +12,13 @@ import { getNearPlaces } from "../api/places";
 import { ILocation, IPlace, appState$ } from "../tools/state";
 import { H1 } from "./Heading";
 import { PlaceCard } from "./PlaceCard";
+import { useTranslation } from "react-i18next";
 
 const page = observer(function Page() {
   const isLoadingLocation$ = useObservable(true);
   const isErrored$ = useObservable<boolean | string>(false);
   const nearPlaces$ = useObservable<IPlace[]>([]); // Array to store the fetched near places
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getLocation = async () => {
@@ -79,7 +81,7 @@ const page = observer(function Page() {
       if={() => !isLoadingLocation$.get()}
       else={() => (
         <View>
-          <H1>Loading...</H1>
+          <H1>{t('constants.loading')}</H1>
           <ScrollView className="px-6 mb-6" horizontal={true}>
             {Array.from({ length: 5 }, (_, i) => (
               <View
@@ -95,14 +97,16 @@ const page = observer(function Page() {
         if={isErrored$}
         else={() => (
           <View>
-            <H1>Near You</H1>
+            <H1>
+              {t("headings.near_you")}
+            </H1>
             <ScrollView className="px-6 mb-6" horizontal={true}>
               <For each={nearPlaces$}>
                 {(item) => (
                   <PlaceCard
                     image={item.get()?.images[0].data}
                     title={item.get()?.name}
-                    subtitle={item.get()?.type}
+                    subtitle={t('constants.place_type.' + item.get()?.type.toLocaleLowerCase())}
                     url={`/places/${item.get()?.id}`}
                   />
                 )}
@@ -112,20 +116,20 @@ const page = observer(function Page() {
         )}
       >
         <View>
-          <H1>Cannot load near places</H1>
+          <H1>{t('errors.load_near_places')}</H1>
           <View className="px-6">
             <Text className="text-neutral-600 dark:text-neutral-400">
               {isErrored$.get()}
             </Text>
             <Text className="text-neutral-600 dark:text-neutral-400">
-              Make sure to allow location access in settings.
+              {t('errors.allow_location')}
             </Text>
             <Pressable
               className="w-full p-3 mt-6 rounded-md bg-neutral-100 dark:bg-neutral-800"
               onPress={Linking.openSettings}
             >
               <Text className="text-base font-semibold text-center text-neutral-900 dark:text-neutral-100">
-                Open App Settings
+                {t('actions.open_app_settings')}
               </Text>
             </Pressable>
           </View>

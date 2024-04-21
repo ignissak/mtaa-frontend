@@ -192,6 +192,10 @@ persistObservable(appState$, {
 });
 
 appState$.savedSettings.onChange((newSettings) => {
+  if (!newSettings.value) {
+    return;
+  }
+  
   const setColorScheme = Appearance.setColorScheme;
   const setColorSchemeNativeWind = NativeWindStyleSheet.setColorScheme;
   if (newSettings.value.appearance === "SYSTEM") {
