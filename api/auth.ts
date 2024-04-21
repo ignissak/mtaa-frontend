@@ -40,8 +40,10 @@ export const register = async (email: string, password: string) => {
   );
   const status = res.status;
   if (status === 201) {
-    appState$.user.token.set(res.data.token);
-    appState$.user.userId.set(res.data.userId);
+    appState$.user.set({
+      token: res.data.data.access_token,
+      userId: res.data.data.userId,
+    });
     return res;
   }
   return res;
@@ -80,6 +82,6 @@ export const signOut = async () => {
   appState$.user.delete();
   appState$.localSettings.delete();
   appState$.savedSettings.delete();
-  appData$.loadedPlaces.delete();
+  appData$.loadedPlaces.set([]);
   appData$.socket.delete();
 };

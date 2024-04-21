@@ -42,7 +42,7 @@ const page = observer(function HomeLayout() {
                       strokeLinejoin="round"
                     ></Path>
                   </Svg>
-                  <Text className="text-sm text-neutral-900 dark:text-neutral-100 ">
+                  <Text className="pr-2 text-sm text-neutral-900 dark:text-neutral-100 ">
                     {toast.message}
                   </Text>
                 </View>
@@ -81,7 +81,7 @@ const page = observer(function HomeLayout() {
                       strokeLinejoin="round"
                     ></Path>
                   </Svg>
-                  <Text className="text-sm text-neutral-900 dark:text-neutral-100 ">
+                  <Text className="pr-2 text-sm text-neutral-900 dark:text-neutral-100">
                     {toast.message}
                   </Text>
                 </View>
@@ -98,7 +98,7 @@ const page = observer(function HomeLayout() {
                         : colors.neutral[400]
                     }
                   />
-                  <Text className="text-sm text-neutral-900 dark:text-neutral-100 ">
+                  <Text className="pr-2 text-sm text-neutral-900 dark:text-neutral-100 ">
                     {toast.message}
                   </Text>
                 </View>

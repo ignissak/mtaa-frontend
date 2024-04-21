@@ -13,7 +13,9 @@
     "processing_qr": "Spracovávame dáta QR kódu...",
     "scan_qr": "Skenovanie QR kódu",
     "reviews": "Recenzie",
-    "leaderboard": "Rebríček"
+    "leaderboard": "Rebríček",
+    "register": "Registrácia",
+    "log_in": "Prihlásenie"
   },
   "errors": {
     "load_near_places": "Nedajú sa načítať blízke miesta",
@@ -25,7 +27,10 @@
     "failed_login": "Nepodarilo sa prihlásiť",
     "email_required": "E-mailová adresa je povinná",
     "password_required": "Heslo je povinné",
-    "visited_places": "Nepodarilo sa načítať navštívené miesta"
+    "visited_places": "Nepodarilo sa načítať navštívené miesta",
+    "password_mismatch": "Heslá sa nezhodujú",
+    "register_conflict": "Účet s touto e-mailovou adresou už existuje",
+    "failed_register": "Nepodarilo sa zaregistrovať"
   },
   "actions": {
     "open_app_settings": "Otvoriť nastavenia aplikácie",
@@ -40,7 +45,9 @@
     "cancel": "Zrušiť",
     "save": "Uložiť",
     "search_for_places": "Hľadať miesta",
-    "type_your_password": "Napíšte svoje heslo"
+    "type_your_password": "Napíšte svoje heslo",
+    "register": "Registrovať",
+    "i_have_account": "Už mám účet"
   },
   "place": {
     "about": "Informácie",
@@ -85,6 +92,17 @@
     "system": "Systémový",
     "dark": "Tmavý",
     "light": "Svetlý"
+  },
+  "toasts": {
+    "already_visited": "Už ste navštívili toto miesto",
+    "marked_as_visited": "Miesto označené ako navštívené",
+    "error_qr": "Chyba pri spracovaní QR kódu",
+    "camera_error": "Chyba kamery",
+    "fetch_error": "Chyba pri načítaní dát",
+    "settings_save_failed": "Chyba pri ukladaní nastavení, error: {{error}}",
+    "settings_saved": "Nastavenia uložené",
+    "marked_as_not_visited": "Miesto označené ako nenavštívené",
+    "marked_as_not_visited_failed": "Nepodarilo sa označiť miesto ako nenavštívené"
   },
   "leaderboard": {
     "last_30_days_top": "Najlepší za posledných 30 dní",
