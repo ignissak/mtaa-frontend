@@ -2,7 +2,7 @@
   "auth": {
     "email": "Email address",
     "password": "Password",
-    "log_in": "Log In"
+    "repeat_password": "Repeat password"
   },
   "headings": {
     "near_you": "Near You",
@@ -14,7 +14,9 @@
     "scan_qr": "Scan a QR code",
     "reviews": "Reviews",
     "settings": "Settings",
-    "leaderboard": "Leaderboard"
+    "leaderboard": "Leaderboard",
+    "register": "Registration",
+    "log_in": "Log In"
   },
   "errors": {
     "load_near_places": "Cannot load near places",
@@ -26,7 +28,10 @@
     "failed_login": "Failed to log in",
     "email_required": "Email is required",
     "password_required": "Password is required",
-    "visited_places": "Cannot load visited places"
+    "visited_places": "Cannot load visited places",
+    "password_mismatch": "Passwords do not match",
+    "register_conflict": "User with this email already exists",
+    "failed_register": "Failed to register"
   },
   "actions": {
     "open_app_settings": "Open App Settings",
@@ -41,7 +46,9 @@
     "cancel": "Cancel",
     "save": "Save",
     "search_for_places": "Search for places",
-    "type_your_password": "Type your password"
+    "type_your_password": "Type your password",
+    "register": "Register",
+    "i_have_account": "I already have an account"
   },
   "place": {
     "about": "About",

@@ -8,7 +8,7 @@ export const updateSettings = async (token: string) => {
       appearance: appState$.localSettings.appearance.get(),
       language: appState$.localSettings.language.get(),
       visitedPublic: appState$.localSettings.visitedPublic.get(),
-      name: appState$.localSettings.name.get(),
+      name: appState$.localSettings.name.get() || "",
     },
     {
       headers: {

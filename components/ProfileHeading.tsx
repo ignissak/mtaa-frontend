@@ -1,13 +1,13 @@
+import { observer } from "@legendapp/state/react";
 import { router } from "expo-router";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Pressable, Text, View, useColorScheme } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import useSWR from "swr";
 import { swrGET } from "../api";
 import { signOut } from "../api/auth";
 import { appState$ } from "../tools/state";
-import { observer } from "@legendapp/state/react";
-import { useTranslation } from "react-i18next";
 
 const page = observer(function ProfileHeading({
   targetUserId,
@@ -98,9 +98,11 @@ const page = observer(function ProfileHeading({
         </View>
       ) : (
         <View className="flex flex-row items-center justify-between w-full px-6 mb-4">
-          <View>
+          <View className="mb-4">
             <Text className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
-              {appState$.savedSettings.name.get()}
+              {(appState$.savedSettings.name.get() || "").length > 0
+                ? appState$.savedSettings.name.get()
+                : "No name set"}
             </Text>
             <Text className="text-base text-neutral-600 dark:text-neutral-400">
               {t("profile.points_count", {
