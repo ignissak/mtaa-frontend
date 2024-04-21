@@ -172,3 +172,17 @@ export const putReview = async (
   );
   return res;
 };
+
+export const deleteReview = async (token: string, placeId: number) => {
+  const res = await axios.delete(
+    `${process.env.EXPO_PUBLIC_API_URL}/v1/places/reviews/${placeId}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return res;
+};

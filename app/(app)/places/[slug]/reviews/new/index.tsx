@@ -21,7 +21,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
 import { useToast } from "react-native-toast-notifications";
 import colors from "tailwindcss/colors";
-import { getPlaceById, putReview } from "../../../../../../api/places";
+import {
+  deleteReview,
+  getPlaceById,
+  putReview,
+} from "../../../../../../api/places";
 import { getUserReviews } from "../../../../../../api/users";
 import { H1 } from "../../../../../../components/Heading";
 import {
@@ -163,11 +167,30 @@ const page = observer(function Page() {
     );
 
     if (res.status === 200) {
-      toast.show("Review saved!", { type: "success" });
+      toast.show(t("toasts.review_saved"), { type: "success" });
+      exists.set(true);
       router.navigate(`/places/${place.id.get()}`);
     } else {
       console.log(res.data);
-      toast.show("An error occured!", { type: "error" });
+      toast.show(t("errors.general"), { type: "error" });
+    }
+  };
+
+  const handleDelete = async () => {
+    const res = await deleteReview(appState$.user.token.get(), place.id.get());
+
+    if (res.status === 200) {
+      toast.show(t("toasts.review_deleted"), { type: "success" });
+      exists.set(false);
+      review.set({
+        rating: 0,
+        comment: "",
+        image: null,
+      });
+      router.navigate(`/places/${place.id.get()}`);
+    } else {
+      console.log(res.data);
+      toast.show(t("errors.general"), { type: "error" });
     }
   };
 
@@ -402,8 +425,8 @@ const page = observer(function Page() {
         {/* BOTTOM BUTTONS */}
         <View className="flex flex-row justify-between px-6 mb-12 space-x-6">
           <Show if={() => exists.get()}>
-            <Pressable className="flex-1" onPress={handleSubmit}>
-              <Text className="p-3 text-base font-semibold text-center rounded-md bg-violet-200 text-violet-900">
+            <Pressable className="flex-1" onPress={handleDelete}>
+              <Text className="p-3 text-base font-semibold text-center rounded-md bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100">
                 {t("actions.delete_review")}
               </Text>
             </Pressable>

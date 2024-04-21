@@ -111,7 +111,9 @@
     "settings_save_failed": "Failed to save settings, error: {{error}}",
     "settings_saved": "Settings saved successfully",
     "marked_as_not_visited": "You marked this place as not visited",
-    "marked_as_not_visited_failed": "Failed to mark this place as not visited"
+    "marked_as_not_visited_failed": "Failed to mark this place as not visited",
+    "review_saved": "Review saved successfully",
+    "review_deleted": "Review deleted successfully"
   },
   "leaderboard": {
     "last_30_days_top": "Last 30 days top",

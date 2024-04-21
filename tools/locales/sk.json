@@ -108,7 +108,9 @@
     "settings_save_failed": "Chyba pri ukladaní nastavení, error: {{error}}",
     "settings_saved": "Nastavenia uložené",
     "marked_as_not_visited": "Miesto označené ako nenavštívené",
-    "marked_as_not_visited_failed": "Nepodarilo sa označiť miesto ako nenavštívené"
+    "marked_as_not_visited_failed": "Nepodarilo sa označiť miesto ako nenavštívené",
+    "review_saved": "Recenzia uložená",
+    "review_deleted": "Recenzia vymazaná"
   },
   "leaderboard": {
     "last_30_days_top": "Najlepší za posledných 30 dní",
