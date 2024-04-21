@@ -5,30 +5,9 @@ import TrendingPlaces from "../../components/TrendingPlaces";
 
 const page = observer(function ExplorePage() {
   return (
-    <SafeAreaView className="bg-neutral-50 dark:bg-neutral-950 min-h-screen h-full mt-4">
+    <SafeAreaView className="h-full min-h-screen pt-4 bg-neutral-50 dark:bg-neutral-950">
       <NearPlaces />
       <TrendingPlaces />
-      {/* <H1>Near You</H1>
-      <ScrollView className="px-6" horizontal={true}>
-        <PlaceCard
-          image="https://unsplash.com/photos/6PwyzRpf13w/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzEwMTA1NzI1fA&force=true&w=640"
-          title="Bratislavský hrad"
-          subtitle="Bratislava, Slovakia"
-          url="/places/nature"
-        />
-        <PlaceCard
-          image="https://unsplash.com/photos/6PwyzRpf13w/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzEwMTA1NzI1fA&force=true&w=640"
-          title="Bratislavský hrad"
-          subtitle="Bratislava, Slovakia"
-          url="/places/nature"
-        />
-        <PlaceCard
-          image="https://unsplash.com/photos/6PwyzRpf13w/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzEwMTA1NzI1fA&force=true&w=640"
-          title="Bratislavský hrad"
-          subtitle="Bratislava, Slovakia"
-          url="/places/nature"
-        />
-      </ScrollView> */}
     </SafeAreaView>
   );
 });

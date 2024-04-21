@@ -204,7 +204,7 @@ const page = observer(function SearchPage() {
   };
 
   return (
-    <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
+    <SafeAreaView className="h-full min-h-screen pt-4 bg-neutral-50 dark:bg-neutral-950">
       <H1>{t("headings.search")}</H1>
 
       <Text className="px-6 mb-4 text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">

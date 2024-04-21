@@ -95,7 +95,7 @@ const page = observer(function PlacePageParent() {
   };
 
   return (
-    <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
+    <SafeAreaView className="h-full min-h-screen pt-4 bg-neutral-50 dark:bg-neutral-950">
       <Show
         if={() => !isLoading$.get()}
         else={() => (

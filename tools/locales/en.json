@@ -13,7 +13,8 @@
     "processing_qr": "Processing QR code data...",
     "scan_qr": "Scan a QR code",
     "reviews": "Reviews",
-    "settings": "Settings"
+    "settings": "Settings",
+    "leaderboard": "Leaderboard"
   },
   "errors": {
     "load_near_places": "Cannot load near places",
@@ -24,7 +25,8 @@
     "invalid_email": "Invalid email address",
     "failed_login": "Failed to log in",
     "email_required": "Email is required",
-    "password_required": "Password is required"
+    "password_required": "Password is required",
+    "visited_places": "Cannot load visited places"
   },
   "actions": {
     "open_app_settings": "Open App Settings",
@@ -51,7 +53,11 @@
   },
   "profile": {
     "log_out": "Log out",
-    "points_count": "{{count}} points"
+    "points_count": "{{count}} points",
+    "my_reviews": "My Reviews",
+    "visited_places": "Visited Places",
+    "reviews_count": "{{count}} reviews",
+    "visited_count": "{{count}} visited"
   },
   "search": {
     "results_count": "{{count}} results",
@@ -91,6 +97,11 @@
     "settings_saved": "Settings saved successfully",
     "marked_as_not_visited": "You marked this place as not visited",
     "marked_as_not_visited_failed": "Failed to mark this place as not visited"
+  },
+  "leaderboard": {
+    "last_30_days_top": "Last 30 days top",
+    "all_time_top": "Overall top",
+    "points_count": "{{count}} points"
   },
   "constants": {
     "place_type": {

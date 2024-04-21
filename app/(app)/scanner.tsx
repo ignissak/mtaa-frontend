@@ -100,7 +100,7 @@ const page = observer(function ScannerPage() {
 
   if (permission?.status === "undetermined") {
     return (
-      <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
+      <SafeAreaView className="h-full min-h-screen pt-4 bg-neutral-50 dark:bg-neutral-950">
         <H1>{t('headings.camera_access')}</H1>
         <Text className="text-neutral-600 dark:text-neutral-400">
           {t('scanner.camera_access_text')}
@@ -111,7 +111,7 @@ const page = observer(function ScannerPage() {
 
   if (isErrored.get()) {
     return (
-      <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
+      <SafeAreaView className="h-full min-h-screen pt-4 bg-neutral-50 dark:bg-neutral-950">
         <H1>{t('headings.error')}</H1>
         <View className="px-6">
           <Text className="text-neutral-600 dark:text-neutral-400">
@@ -132,7 +132,7 @@ const page = observer(function ScannerPage() {
 
   if (processing.get()) {
     return (
-      <SafeAreaView className="flex flex-col h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
+      <SafeAreaView className="flex flex-col h-full min-h-screen pt-4 bg-neutral-50 dark:bg-neutral-950">
         <H1>{t('headings.processing_qr')}</H1>
         <Text className="px-6 text-neutral-600 dark:text-neutral-400">
           {t('scanner.processing_qr_text')}
@@ -151,7 +151,7 @@ const page = observer(function ScannerPage() {
   }
 
   return (
-    <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
+    <SafeAreaView className="h-full min-h-screen pt-4 bg-neutral-50 dark:bg-neutral-950">
       <H1>{t('headings.scan_qr')}</H1>
       <Text className="px-6 mb-2 text-neutral-600 dark:text-neutral-400">
         {t('scanner.scan_text')}
