@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const getPlaceById = async (slug: string, token: string) => {
   const res = await axios.get(
     `${process.env.EXPO_PUBLIC_API_URL}/v1/places/${slug}`,
     {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     }
@@ -25,7 +25,7 @@ export const getNearPlaces = async (
     {
       headers: {
         Authorization: `Bearer ${token}`,
-        'Response-Type': 'application/json',
+        "Response-Type": "application/json",
       },
     }
   );
@@ -38,7 +38,7 @@ export const getTrendingPlaces = async (token: string) => {
     {
       headers: {
         Authorization: `Bearer ${token}`,
-        'Response-Type': 'application/json',
+        "Response-Type": "application/json",
       },
     }
   );
@@ -51,15 +51,15 @@ export const searchPlaces = async (
   page: number = 1,
   latitude: number,
   longitude: number,
-  query: string = '',
-  region: string = '',
-  type: string = ''
+  query: string = "",
+  region: string = "",
+  type: string = ""
 ) => {
   const res = await axios.get(
     `${process.env.EXPO_PUBLIC_API_URL}/v1/places?limit=${limit}&page=${page}&latitude=${latitude}&longitude=${longitude}&query=${query}&region=${region}&type=${type}`,
     {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     }
@@ -82,7 +82,7 @@ export const visitPlace = async (
     },
     {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     }
@@ -96,7 +96,7 @@ export const removeVisitPlace = async (token: string, placeId: number) => {
     `${process.env.EXPO_PUBLIC_API_URL}/v1/places/visits/${placeId}`,
     {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     }
@@ -114,7 +114,7 @@ export const hasVisitedPlace = async (
     `${process.env.EXPO_PUBLIC_API_URL}/v1/places/visits/${userId}?placeId=${placeId}`,
     {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     }
@@ -133,7 +133,7 @@ export const getPlaceReviews = async (
     `${process.env.EXPO_PUBLIC_API_URL}/v1/places/reviews/${placeId}?page=${page}&limit=${limit}`,
     {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     }
@@ -147,7 +147,25 @@ export const getVisitedPlaces = async (token: string, userId: number) => {
     `${process.env.EXPO_PUBLIC_API_URL}/v1/places/visited/${userId}`,
     {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return res;
+};
+
+export const putReview = async (
+  token: string,
+  placeId: number,
+  formData: FormData
+) => {
+  const res = await axios.put(
+    `${process.env.EXPO_PUBLIC_API_URL}/v1/places/reviews/${placeId}`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
     }

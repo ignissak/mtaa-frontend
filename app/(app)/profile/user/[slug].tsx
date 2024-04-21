@@ -1,7 +1,7 @@
 import { Show, observer, useObservable } from "@legendapp/state/react";
 import { useLocalSearchParams } from "expo-router";
 import React, { useEffect } from "react";
-import { ActivityIndicator, Text, View } from "react-native";
+import { ActivityIndicator, Text, View, useColorScheme } from "react-native";
 import { deleteReviewById, getUserReviews } from "../../../../api/users";
 import { H1 } from "../../../../components/Heading";
 import ProfileHeading from "../../../../components/ProfileHeading";
@@ -10,6 +10,7 @@ import VisitedPlaces from "../../../../components/VisitedPlaces";
 import { IUserReview, appState$ } from "../../../../tools/state";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
+import colors from "tailwindcss/colors";
 
 const page = observer(function ProfilePage() {
   const { slug } = useLocalSearchParams();
@@ -17,6 +18,7 @@ const page = observer(function ProfilePage() {
   const targetUserId = slug === "me" ? appState$.user.userId.get() : slug;
   const isLoading$ = useObservable(true);
   const { t } = useTranslation();
+  const colorScheme = useColorScheme();
 
   useEffect(() => {
     fetchUserData();
@@ -74,7 +76,11 @@ const page = observer(function ProfilePage() {
               ))
           }
         >
-          <ActivityIndicator size="small" color="#s0000ff" />
+          <ActivityIndicator size="small" color={
+                      colorScheme === "dark"
+                        ? colors.neutral[400]
+                        : colors.neutral[600]
+                    } />
         </Show>
       </View>
       <VisitedPlaces />

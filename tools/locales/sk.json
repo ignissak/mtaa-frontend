@@ -47,7 +47,9 @@
     "search_for_places": "Hľadať miesta",
     "type_your_password": "Napíšte svoje heslo",
     "register": "Registrovať",
-    "i_have_account": "Už mám účet"
+    "i_have_account": "Už mám účet",
+    "submit_review": "Odoslať recenziu",
+    "delete_review": "Vymazať recenziu"
   },
   "place": {
     "about": "Informácie",
@@ -75,7 +77,11 @@
   },
   "reviews": {
     "reviews_count": "{{count}} recenzií",
-    "no_reviews": "Zatiaľ žiadne recenzie"
+    "no_reviews": "Zatiaľ žiadne recenzie",
+    "reviewing": "Recenzuješ {{place}}",
+    "rating": "Hodnotenie",
+    "comment": "Komentár",
+    "image": "Fotografia"
   },
   "scanner": {
     "camera_access_text": "Prístup k fotoaparátu je potrebný pre správne fungovanie aplikácie. Prosím, povolte prístup k fotoaparátu.",

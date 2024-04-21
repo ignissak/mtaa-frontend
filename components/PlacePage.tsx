@@ -4,6 +4,7 @@ import { FlashList } from "@shopify/flash-list";
 import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Image,
   Linking,
@@ -27,7 +28,6 @@ import {
   markPlaceVisited,
 } from "../tools/state";
 import { H1 } from "./Heading";
-import { useTranslation } from "react-i18next";
 
 const page = observer(function Page({
   place,
@@ -98,14 +98,16 @@ const page = observer(function Page({
     if (res.status === 200) {
       visited?.set(false);
       markPlaceVisited(place.id.get(), false);
-      toast.show(t('toasts.marked_as_not_visited'), { type: "success" });
+      toast.show(t("toasts.marked_as_not_visited"), { type: "success" });
     } else {
-      toast.show(t('toasts.marked_as_not_visited_failed'), { type: "error" });
+      toast.show(t("toasts.marked_as_not_visited_failed"), { type: "error" });
       console.log("Failed to mark place as not visited", res.data);
     }
   };
 
-  const handleWriteReview = async () => {};
+  const handleWriteReview = async () => {
+    router.push("/places/" + place.id.get() + "/reviews/new");
+  };
 
   return (
     <View className="flex flex-col justify-between h-full pb-12">
@@ -186,8 +188,8 @@ const page = observer(function Page({
               {averageRating.get() === -1
                 ? t("constants.loading")
                 : averageRating.get() === 0
-                ? t("place.no_rating")
-                : averageRating.get().toFixed(1) + "/5"}
+                  ? t("place.no_rating")
+                  : averageRating.get().toFixed(1) + "/5"}
             </Text>
           </View>
           <View className="flex flex-row items-center px-4 py-3 space-x-2 rounded-md bg-neutral-100 dark:bg-neutral-800">
@@ -356,14 +358,14 @@ const page = observer(function Page({
                     }}
                   >
                     <Text className="font-semibold text-center uppercase text-neutral-900 dark:text-neutral-100">
-                      {t('actions.show_all_reviews')}
+                      {t("actions.show_all_reviews")}
                     </Text>
                   </Pressable>
                 </View>
               )}
             >
               <Text className="text-neutral-900 dark:text-neutral-100">
-                {t('place.no_reviews_text')}
+                {t("place.no_reviews_text")}
               </Text>
             </Show>
           </View>
@@ -406,7 +408,7 @@ const page = observer(function Page({
                 ></Path>
               </Svg>
               <Text className="font-semibold text-neutral-900 dark:text-neutral-100">
-                {t('actions.mark_as_not_visited')}
+                {t("actions.mark_as_not_visited")}
               </Text>
             </Pressable>
             <Pressable
@@ -434,7 +436,7 @@ const page = observer(function Page({
                 ></Path>
               </Svg>
               <Text className="font-semibold text-neutral-900 dark:text-neutral-100">
-                {t('actions.write_review')}
+                {t("actions.write_review")}
               </Text>
             </Pressable>
           </Show>
@@ -452,7 +454,9 @@ const page = observer(function Page({
                 : "text-neutral-900 dark:text-neutral-100"
             }`}
           >
-            {visited?.get() ? t('actions.visited_place') : t('actions.i_am_here')}
+            {visited?.get()
+              ? t("actions.visited_place")
+              : t("actions.i_am_here")}
           </Text>
         </Pressable>
       </Show>

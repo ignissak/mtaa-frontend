@@ -31,7 +31,9 @@
     "visited_places": "Cannot load visited places",
     "password_mismatch": "Passwords do not match",
     "register_conflict": "User with this email already exists",
-    "failed_register": "Failed to register"
+    "failed_register": "Failed to register",
+    "comment_required": "Comment is required",
+    "rating_required": "Rating is required"
   },
   "actions": {
     "open_app_settings": "Open App Settings",
@@ -48,7 +50,9 @@
     "search_for_places": "Search for places",
     "type_your_password": "Type your password",
     "register": "Register",
-    "i_have_account": "I already have an account"
+    "i_have_account": "I already have an account",
+    "submit_review": "Submit review",
+    "delete_review": "Delete review"
   },
   "place": {
     "about": "About",
@@ -76,7 +80,11 @@
   },
   "reviews": {
     "reviews_count": "{{count}} reviews",
-    "no_reviews": "No reviews yet"
+    "no_reviews": "No reviews yet",
+    "reviewing": "Reviewing {{place}}",
+    "rating": "Rating",
+    "comment": "Comment",
+    "image": "Image"
   },
   "scanner": {
     "camera_access_text": "Camera access is required for proper application functionality. Please allow camera access.",
