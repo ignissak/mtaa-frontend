@@ -20,12 +20,14 @@ import {
   markPlaceVisited,
   setTotalReviewCountForPlace,
 } from "../../../../tools/state";
+import { useTranslation } from "react-i18next";
 
 const page = observer(function PlacePageParent() {
   const { slug } = useLocalSearchParams();
   const isLoading$ = useObservable(true);
   const isErrored$ = useObservable<boolean | string>(false);
   const place$ = useObservable<IPlace>();
+  const { t } = useTranslation();
 
   useEffect(() => {
     isLoading$.set(true);
@@ -98,7 +100,7 @@ const page = observer(function PlacePageParent() {
         if={() => !isLoading$.get()}
         else={() => (
           <View>
-            <H1>Loading...</H1>
+            <H1>{t('constants.loading')}</H1>
             <ScrollView className="px-6 mb-6" horizontal={true}>
               {Array.from({ length: 5 }, (_, i) => (
                 <View
@@ -122,20 +124,20 @@ const page = observer(function PlacePageParent() {
       >
         <Show if={isErrored$} else={() => <PlacePage place={place$} />}>
           <View>
-            <H1>Cannot load place</H1>
+            <H1>{t('errors.general')}</H1>
             <View className="px-6">
               <Text className="text-neutral-600 dark:text-neutral-400">
                 {isErrored$.get()}
               </Text>
               <Text className="text-neutral-600 dark:text-neutral-400">
-                Make sure to allow location access in settings.
+                {t('errors.allow_location')}
               </Text>
               <Pressable
                 className="w-full p-3 mt-6 rounded-md bg-neutral-100 dark:bg-neutral-800"
                 onPress={Linking.openSettings}
               >
                 <Text className="text-base font-semibold text-center text-neutral-900 dark:text-neutral-100">
-                  Open App Settings
+                  {t('actions.open_app_settings')}
                 </Text>
               </Pressable>
             </View>

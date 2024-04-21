@@ -27,6 +27,7 @@ import {
   markPlaceVisited,
 } from "../tools/state";
 import { H1 } from "./Heading";
+import { useTranslation } from "react-i18next";
 
 const page = observer(function Page({
   place,
@@ -40,6 +41,7 @@ const page = observer(function Page({
     (p) => p.id.get() == place.id.get()
   )?.visited;
   const toast = useToast();
+  const { t } = useTranslation();
 
   const openGps = (lat: number, lng: number, label: string) => {
     const scheme = Platform.OS === "ios" ? "maps:" : "geo:";
@@ -96,9 +98,9 @@ const page = observer(function Page({
     if (res.status === 200) {
       visited?.set(false);
       markPlaceVisited(place.id.get(), false);
-      toast.show("You marked this place as not visited", { type: "success" });
+      toast.show(t('toasts.marked_as_not_visited'), { type: "success" });
     } else {
-      toast.show("Failed to mark place as not visited", { type: "error" });
+      toast.show(t('toasts.marked_as_not_visited_failed'), { type: "error" });
       console.log("Failed to mark place as not visited", res.data);
     }
   };
@@ -120,7 +122,7 @@ const page = observer(function Page({
         </ScrollView>
         <View className="flex w-full gap-1 px-6 mb-2">
           <Text className="text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
-            ABOUT
+            {t("place.about")}
           </Text>
           <Text className="text-base text-neutral-900 dark:text-neutral-100">
             {place.description.get()}
@@ -182,9 +184,9 @@ const page = observer(function Page({
             </Svg>
             <Text className="font-semibold text-neutral-900 dark:text-neutral-100">
               {averageRating.get() === -1
-                ? "Loading..."
+                ? t("constants.loading")
                 : averageRating.get() === 0
-                ? "No ratings"
+                ? t("place.no_rating")
                 : averageRating.get().toFixed(1) + "/5"}
             </Text>
           </View>
@@ -223,7 +225,7 @@ const page = observer(function Page({
         </View>
         <View className="flex w-full gap-1 px-6 mb-6 h-44">
           <Text className="text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
-            LOCATION
+            {t("place.location")}
           </Text>
           <MapView
             className="w-full h-36"
@@ -253,10 +255,10 @@ const page = observer(function Page({
         <View className="flex w-full px-6 mb-6 space-y-1">
           <Text className="text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
             {(place.totalReviewCount.get() || 0) === 0
-              ? "NO REVIEWS"
-              : `REVIEWED ${place.totalReviewCount.get() || 0} ${
-                  (place.totalReviewCount.get() || 0) === 1 ? "TIME" : "TIMES"
-                }`}
+              ? t("place.no_reviews_title")
+              : t("place.reviews_count", {
+                  count: place.totalReviewCount.get(),
+                })}
           </Text>
           <View>
             <Show
@@ -353,15 +355,15 @@ const page = observer(function Page({
                       router.push(`/places/${place.id.get()}/reviews`);
                     }}
                   >
-                    <Text className="font-semibold text-center text-neutral-900 dark:text-neutral-100">
-                      SHOW ALL REVIEWS
+                    <Text className="font-semibold text-center uppercase text-neutral-900 dark:text-neutral-100">
+                      {t('actions.show_all_reviews')}
                     </Text>
                   </Pressable>
                 </View>
               )}
             >
               <Text className="text-neutral-900 dark:text-neutral-100">
-                Nobody posted a review yet :(
+                {t('place.no_reviews_text')}
               </Text>
             </Show>
           </View>
@@ -404,7 +406,7 @@ const page = observer(function Page({
                 ></Path>
               </Svg>
               <Text className="font-semibold text-neutral-900 dark:text-neutral-100">
-                Mark as not visited
+                {t('actions.mark_as_not_visited')}
               </Text>
             </Pressable>
             <Pressable
@@ -432,7 +434,7 @@ const page = observer(function Page({
                 ></Path>
               </Svg>
               <Text className="font-semibold text-neutral-900 dark:text-neutral-100">
-                Write a review
+                {t('actions.write_review')}
               </Text>
             </Pressable>
           </Show>
@@ -450,7 +452,7 @@ const page = observer(function Page({
                 : "text-neutral-900 dark:text-neutral-100"
             }`}
           >
-            {visited?.get() ? "You have visited this place" : "I am here now"}
+            {visited?.get() ? t('actions.visited_place') : t('actions.i_am_here')}
           </Text>
         </Pressable>
       </Show>

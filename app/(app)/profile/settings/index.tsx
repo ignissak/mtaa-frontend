@@ -2,6 +2,7 @@ import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
 import { observer } from "@legendapp/state/react";
 import { router } from "expo-router";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Pressable, Text, TextInput, View, useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
@@ -17,6 +18,7 @@ import { IAppearance, ILanguage, appState$ } from "../../../../tools/state";
 const page = observer(function SettingsPage() {
   const colorScheme = useColorScheme();
   const toast = useToast();
+  const { t } = useTranslation();
 
   const { savedSettings, localSettings } = appState$;
 
@@ -66,7 +68,7 @@ const page = observer(function SettingsPage() {
 
     if (status !== 200) {
       console.log("Failed to update settings: ", res);
-      toast.show("Failed to save settings! Error: " + res.data.error, {
+      toast.show(t("toasts.settings_save_failed", { error: res.data.error }), {
         type: "danger",
       });
       return;
@@ -75,7 +77,7 @@ const page = observer(function SettingsPage() {
     savedSettings.appearance.set(localSettings.appearance.get());
     savedSettings.visitedPublic.set(localSettings.visitedPublic.get());
     console.log("Saved settings: ", savedSettings.get());
-    toast.show("Settings have been saved!", { type: "success" });
+    toast.show(t('toasts.settings_saved'), { type: "success" });
   };
 
   const handleCancel = async () => {
@@ -91,13 +93,13 @@ const page = observer(function SettingsPage() {
 
   return (
     <SafeAreaView className="w-full h-full min-h-screen my-4 bg-neutral-50 dark:bg-neutral-950">
-      <H1>Settings</H1>
+      <H1>{t("headings.settings")}</H1>
       <View className="flex flex-col justify-between px-6 grow">
         {/* SETTINGS */}
         <View className="flex flex-col gap-4">
           <View className="flex flex-col space-y-1">
             <Text className="text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
-              DISPLAY NAME
+              {t("settings.display_name")}
             </Text>
             <View
               className={`p-3 bg-neutral-100 dark:bg-neutral-800 rounded-md flex-row items-center justify-between`}
@@ -115,7 +117,7 @@ const page = observer(function SettingsPage() {
           </View>
           <View className="flex flex-row items-center justify-between ">
             <Text className="text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
-              SHOW MY VISITED PLACES PUBLICLY
+              {t("settings.show_visited_public")}
             </Text>
             <ToggleSwitch
               size="medium"
@@ -131,7 +133,7 @@ const page = observer(function SettingsPage() {
           {/* APPEARANCE */}
           <View className="flex flex-row items-center justify-between ">
             <Text className="text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
-              APPEARANCE
+              {t("settings.appearance")}
             </Text>
             <Pressable
               className="flex flex-row items-center gap-1"
@@ -192,14 +194,14 @@ const page = observer(function SettingsPage() {
                 <View className="flex flex-col justify-between h-full">
                   <View className="px-6 py-2">
                     <Text className="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                      Appearance settings
+                      {t("settings.appearance_settings")}
                     </Text>
                     <Pressable
                       className="flex flex-row justify-between mb-3"
                       onPress={() => handleAppearanceChange("SYSTEM")}
                     >
                       <Text className="text-base text-neutral-900 dark:text-neutral-100">
-                        System default
+                        {t("settings.system")}
                       </Text>
                       <Radio
                         checked={localSettings.appearance.get() === "SYSTEM"}
@@ -211,7 +213,7 @@ const page = observer(function SettingsPage() {
                       onPress={() => handleAppearanceChange("LIGHT_MODE")}
                     >
                       <Text className="text-base text-neutral-900 dark:text-neutral-100">
-                        Light mode
+                        {t("settings.light")}
                       </Text>
                       <Radio
                         checked={
@@ -224,7 +226,7 @@ const page = observer(function SettingsPage() {
                       onPress={() => handleAppearanceChange("DARK_MODE")}
                     >
                       <Text className="text-base text-neutral-900 dark:text-neutral-100">
-                        Dark mode
+                        {t("settings.dark")}
                       </Text>
                       <Radio
                         checked={localSettings.appearance.get() === "DARK_MODE"}
@@ -250,7 +252,7 @@ const page = observer(function SettingsPage() {
           {/* LANGUAGE */}
           <View className="flex flex-row items-center justify-between ">
             <Text className="text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
-              LANGUAGE
+              {t("settings.language")}
             </Text>
             <Pressable
               className="flex flex-row items-center gap-1"
@@ -309,7 +311,7 @@ const page = observer(function SettingsPage() {
                 <View className="flex flex-col justify-between h-full">
                   <View className="px-6 py-2">
                     <Text className="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                      Language settings
+                      {t("settings.language_settings")}
                     </Text>
                     <Pressable
                       className="flex flex-row justify-between mb-3"
@@ -344,12 +346,12 @@ const page = observer(function SettingsPage() {
         <View className="flex flex-row justify-between mb-12 space-x-6">
           <Pressable className="grow" onPress={handleCancel}>
             <Text className="p-3 text-base font-semibold text-center rounded-md bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100">
-              Cancel
+              {t("actions.cancel")}
             </Text>
           </Pressable>
           <Pressable className="grow" onPress={handleUpdate}>
             <Text className="p-3 text-base font-semibold text-center rounded-md bg-violet-200 text-violet-900">
-              Save
+              {t("actions.save")}
             </Text>
           </Pressable>
         </View>

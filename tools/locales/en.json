@@ -1,0 +1,131 @@
+{
+  "auth": {
+    "email": "Email address",
+    "password": "Password",
+    "log_in": "Log In"
+  },
+  "headings": {
+    "near_you": "Near You",
+    "trending": "Trending Places",
+    "search": "Search",
+    "camera_access": "Allow Camera Access",
+    "error": "There was an error!",
+    "processing_qr": "Processing QR code data...",
+    "scan_qr": "Scan a QR code",
+    "reviews": "Reviews",
+    "settings": "Settings"
+  },
+  "errors": {
+    "load_near_places": "Cannot load near places",
+    "load_trending_places": "Cannot load trending places",
+    "allow_location": "Make sure to allow location access in settings.",
+    "general": "Oh no! There was an error.",
+    "invalid_login": "Invalid login credentials",
+    "invalid_email": "Invalid email address",
+    "failed_login": "Failed to log in",
+    "email_required": "Email is required",
+    "password_required": "Password is required"
+  },
+  "actions": {
+    "open_app_settings": "Open App Settings",
+    "show_all_reviews": "Show All Reviews",
+    "mark_as_not_visited": "Mark as not visited",
+    "write_review": "Write A Review",
+    "i_am_here": "I am here now",
+    "visited_place": "You have visited this place",
+    "create_account": "Create New Account",
+    "log_in": "Log In",
+    "search": "Search",
+    "cancel": "Cancel",
+    "save": "Save",
+    "search_for_places": "Search for places",
+    "type_your_password": "Type your password"
+  },
+  "place": {
+    "about": "About",
+    "location": "Location",
+    "no_rating": "No ratings",
+    "no_reviews_text": "Nobody posted a review yet :(",
+    "no_reviews_title": "No Reviews",
+    "reviews_count": "{{count}} reviews"
+  },
+  "profile": {
+    "log_out": "Log out",
+    "points_count": "{{count}} points"
+  },
+  "search": {
+    "results_count": "{{count}} results",
+    "search_placeholder": "Search for places",
+    "no_results": "No results found",
+    "filters": "Filters",
+    "categories": "Categories",
+    "regions": "Regions"
+  },
+  "reviews": {
+    "reviews_count": "{{count}} reviews",
+    "no_reviews": "No reviews yet"
+  },
+  "scanner": {
+    "camera_access_text": "Camera access is required for proper application functionality. Please allow camera access.",
+    "processing_qr_text": "Please wait while we process the QR code data.",
+    "scan_text": "If you are at the location of a place, find a QR code to scan."
+  },
+  "settings": {
+    "display_name": "Display Name",
+    "show_visited_public": "Show my visited places publicly",
+    "appearance": "Appearance",
+    "language": "Language",
+    "appearance_settings": "Appearance Settings",
+    "language_settings": "Language Settings",
+    "system": "System default",
+    "dark": "Dark mode",
+    "light": "Light mode"
+  },
+  "toasts": {
+    "already_visited": "You have already visited this place",
+    "marked_as_visited": "Successfully marked place as visited",
+    "error_qr": "Error processing QR code",
+    "camera_error": "Camera error",
+    "fetch_error": "Error fetching data",
+    "settings_save_failed": "Failed to save settings, error: {{error}}",
+    "settings_saved": "Settings saved successfully",
+    "marked_as_not_visited": "You marked this place as not visited",
+    "marked_as_not_visited_failed": "Failed to mark this place as not visited"
+  },
+  "constants": {
+    "place_type": {
+      "parks_and_gardens": "Parks and Gardens",
+      "churches": "Churches",
+      "castles": "Castles",
+      "museums": "Museums",
+      "galleries": "Galleries",
+      "monuments": "Monuments",
+      "memorials": "Memorials",
+      "statues": "Statues",
+      "wells_and_springs": "Wells and Springs",
+      "lakes": "Lakes",
+      "rivers": "Rivers",
+      "mountains": "Mountains",
+      "caves": "Caves",
+      "waterfalls": "Waterfalls",
+      "mills": "Mills",
+      "bridges": "Bridges",
+      "towers": "Towers",
+      "zoo": "Zoo",
+      "palaces": "Palaces",
+      "other": "Other"
+    },
+    "region": {
+      "bratislava": "Bratislava",
+      "trnava": "Trnava",
+      "trencin": "Trenčín",
+      "nitra": "Nitra",
+      "zilina": "Žilina",
+      "banska_bystrica": "Banská Bystrica",
+      "presov": "Prešov",
+      "kosice": "Košice",
+      "other": "Other"
+    },
+    "loading": "Loading..."
+  }
+}

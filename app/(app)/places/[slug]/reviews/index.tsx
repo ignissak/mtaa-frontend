@@ -15,6 +15,7 @@ import colors from "tailwindcss/colors";
 import { getPlaceReviews } from "../../../../../api/places";
 import { H1 } from "../../../../../components/Heading";
 import { appState$ } from "../../../../../tools/state";
+import { useTranslation } from "react-i18next";
 
 const page = observer(function Page() {
   const { slug } = useLocalSearchParams();
@@ -28,6 +29,7 @@ const page = observer(function Page() {
   const totalResults = useObservable(0);
   const isLoading = useObservable(true);
   const averageRating = useObservable(-1);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchReviews(true);
@@ -86,9 +88,9 @@ const page = observer(function Page() {
 
   return (
     <SafeAreaView className="h-full min-h-screen mt-4 bg-neutral-50 dark:bg-neutral-950">
-      <H1>Reviews</H1>
+      <H1>{t('headings.reviews')}</H1>
       <Text className="px-6 mb-4 text-sm font-semibold uppercase text-neutral-500 dark:text-neutral-400">
-        TOTAL {totalResults.get()} REVIEWS
+        {t('reviews.reviews_count', {count: totalResults.get()})}
       </Text>
       <Show
         else={() => (
@@ -101,7 +103,7 @@ const page = observer(function Page() {
             else={() => (
               <View className="flex items-center justify-center h-full">
                 <Text className="text-neutral-600 dark:text-neutral-400">
-                  No reviews.
+                  {t('reviews.no_reviews')}
                 </Text>
               </View>
             )}
