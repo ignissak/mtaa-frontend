@@ -31,7 +31,8 @@
     "visited_places": "Cannot load visited places",
     "password_mismatch": "Passwords do not match",
     "register_conflict": "User with this email already exists",
-    "failed_register": "Failed to register"
+    "failed_register": "Failed to register",
+    "no_internet": "No internet connection"
   },
   "actions": {
     "open_app_settings": "Open App Settings",

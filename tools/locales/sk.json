@@ -30,7 +30,8 @@
     "visited_places": "Nepodarilo sa načítať navštívené miesta",
     "password_mismatch": "Heslá sa nezhodujú",
     "register_conflict": "Účet s touto e-mailovou adresou už existuje",
-    "failed_register": "Nepodarilo sa zaregistrovať"
+    "failed_register": "Nepodarilo sa zaregistrovať",
+    "no_internet": "Žiadne pripojenie k internetu"
   },
   "actions": {
     "open_app_settings": "Otvoriť nastavenia aplikácie",

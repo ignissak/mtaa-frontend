@@ -2,6 +2,7 @@ import NetInfo from "@react-native-community/netinfo";
 import axios from "axios";
 import { Toast } from "react-native-toast-notifications";
 import { BareFetcher } from "swr";
+import i18n from "../tools/locales";
 
 axios.defaults.validateStatus = (status) => status >= 200 && status <= 500;
 
@@ -9,7 +10,7 @@ axios.interceptors.request.use((config) => {
   NetInfo.fetch().then((state) => {
     console.log("Am I connected?", state.isConnected);
     if (!state.isConnected) {
-      Toast.show("No internet connection", { type: "danger", duration: 10000 });
+      Toast.show(i18n.t('no_internet'), { type: "danger", duration: 10000 });
       return;
     }
   });
