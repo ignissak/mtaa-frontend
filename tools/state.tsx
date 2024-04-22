@@ -108,6 +108,8 @@ export const appData$ = observable({
   socket: undefined as Socket | undefined,
 });
 
+export const pushToken = observable("");
+
 export const findLoadedPlace = (id: number) => {
   const place = appData$.loadedPlaces.find((place) => place.id.get() === id);
   if (
@@ -202,6 +204,10 @@ configureObservablePersistence({
 
 persistObservable(appState$, {
   local: 'appStore',
+});
+
+persistObservable(pushToken, {
+  local: "pushToken",
 });
 
 appState$.savedSettings.onChange((newSettings) => {
