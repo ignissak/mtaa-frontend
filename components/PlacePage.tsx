@@ -109,7 +109,7 @@ const page = observer(function Page({
 
   return (
     <View className="flex flex-col justify-between h-full pb-12">
-      <ScrollView className="h-full border border-yellow-500">
+      <ScrollView className="h-full border-yellow-500">
         <H1>{place.name.get()}</H1>
         <ScrollView className="px-6 mb-6" horizontal={true}>
           {place.images.get().map((image, i) => (
@@ -267,7 +267,7 @@ const page = observer(function Page({
                 place.reviews.get() === undefined
               }
               else={() => (
-                <View className="border border-red-500">
+                <View className="border-red-500">
                   <View>
                     <FlashList
                       data={place.reviews.get() || []}
@@ -442,7 +442,7 @@ const page = observer(function Page({
       </ScrollView>
       <Show if={visited !== undefined}>
         <Pressable
-          className="px-6 border border-red-500"
+          className="px-6 border-red-500"
           onPress={handleBottomButton}
         >
           <Text
