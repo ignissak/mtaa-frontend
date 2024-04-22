@@ -52,7 +52,7 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
       title,
       body,
     },
-    trigger: { seconds: 1 },
+    trigger: { minute: 1 },
   });
 
   return BackgroundFetch.BackgroundFetchResult.NewData;
