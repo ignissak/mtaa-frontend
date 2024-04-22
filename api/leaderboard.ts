@@ -51,7 +51,7 @@ export const getUserPosition = async (
         },
       }
     );
-    return res.data.position;
+    return res.data.data.position;
   } catch (error) {
     console.error('Error fetching user position:', error);
     throw error;
