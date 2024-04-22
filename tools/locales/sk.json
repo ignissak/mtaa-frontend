@@ -31,6 +31,8 @@
     "password_mismatch": "Heslá sa nezhodujú",
     "register_conflict": "Účet s touto e-mailovou adresou už existuje",
     "failed_register": "Nepodarilo sa zaregistrovať",
+    "comment_required": "Komentár je povinný",
+    "rating_required": "Hodnotenie je povinné",
     "no_internet": "Žiadne pripojenie k internetu"
   },
   "actions": {
@@ -48,7 +50,9 @@
     "search_for_places": "Hľadať miesta",
     "type_your_password": "Napíšte svoje heslo",
     "register": "Registrovať",
-    "i_have_account": "Už mám účet"
+    "i_have_account": "Už mám účet",
+    "submit_review": "Odoslať recenziu",
+    "delete_review": "Vymazať recenziu"
   },
   "place": {
     "about": "Informácie",
@@ -76,7 +80,11 @@
   },
   "reviews": {
     "reviews_count": "{{count}} recenzií",
-    "no_reviews": "Zatiaľ žiadne recenzie"
+    "no_reviews": "Zatiaľ žiadne recenzie",
+    "reviewing": "Recenzuješ {{place}}",
+    "rating": "Hodnotenie",
+    "comment": "Komentár",
+    "image": "Fotografia"
   },
   "scanner": {
     "camera_access_text": "Prístup k fotoaparátu je potrebný pre správne fungovanie aplikácie. Prosím, povolte prístup k fotoaparátu.",
@@ -103,7 +111,9 @@
     "settings_save_failed": "Chyba pri ukladaní nastavení, error: {{error}}",
     "settings_saved": "Nastavenia uložené",
     "marked_as_not_visited": "Miesto označené ako nenavštívené",
-    "marked_as_not_visited_failed": "Nepodarilo sa označiť miesto ako nenavštívené"
+    "marked_as_not_visited_failed": "Nepodarilo sa označiť miesto ako nenavštívené",
+    "review_saved": "Recenzia uložená",
+    "review_deleted": "Recenzia vymazaná"
   },
   "leaderboard": {
     "last_30_days_top": "Najlepší za posledných 30 dní",

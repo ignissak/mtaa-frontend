@@ -32,6 +32,8 @@
     "password_mismatch": "Passwords do not match",
     "register_conflict": "User with this email already exists",
     "failed_register": "Failed to register",
+    "comment_required": "Comment is required",
+    "rating_required": "Rating is required",
     "no_internet": "No internet connection"
   },
   "actions": {
@@ -49,7 +51,9 @@
     "search_for_places": "Search for places",
     "type_your_password": "Type your password",
     "register": "Register",
-    "i_have_account": "I already have an account"
+    "i_have_account": "I already have an account",
+    "submit_review": "Submit review",
+    "delete_review": "Delete review"
   },
   "place": {
     "about": "About",
@@ -77,7 +81,11 @@
   },
   "reviews": {
     "reviews_count": "{{count}} reviews",
-    "no_reviews": "No reviews yet"
+    "no_reviews": "No reviews yet",
+    "reviewing": "Reviewing {{place}}",
+    "rating": "Rating",
+    "comment": "Comment",
+    "image": "Image"
   },
   "scanner": {
     "camera_access_text": "Camera access is required for proper application functionality. Please allow camera access.",
@@ -104,7 +112,9 @@
     "settings_save_failed": "Failed to save settings, error: {{error}}",
     "settings_saved": "Settings saved successfully",
     "marked_as_not_visited": "You marked this place as not visited",
-    "marked_as_not_visited_failed": "Failed to mark this place as not visited"
+    "marked_as_not_visited_failed": "Failed to mark this place as not visited",
+    "review_saved": "Review saved successfully",
+    "review_deleted": "Review deleted successfully"
   },
   "leaderboard": {
     "last_30_days_top": "Last 30 days top",

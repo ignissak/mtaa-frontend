@@ -19,10 +19,10 @@ export const updateSettings = async (token: string) => {
   );
 };
 
-export const getUserReviews = async (token: string, userId: number) => {
+export const getUserReviews = async (token: string, userId: number, placeId?: number) => {
   try {
     const res = await axios.get(
-      `${process.env.EXPO_PUBLIC_API_URL}/v1/users/${userId}/reviews`,
+      `${process.env.EXPO_PUBLIC_API_URL}/v1/users/${userId}/reviews?placeId=${placeId || ''}`,
       {
         headers: {
           'Content-Type': 'application/json',
